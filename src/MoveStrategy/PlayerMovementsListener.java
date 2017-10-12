@@ -6,7 +6,6 @@
 package MoveStrategy;
 
 import GUI.Controller;
-import GameObjects.Helper;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -22,7 +21,6 @@ public class PlayerMovementsListener implements KeyListener {
         this.controller = controller;
     }
 
-    Receiver receiver = new Receiver();
     Invoker invoker = new Invoker();
 
     @Override

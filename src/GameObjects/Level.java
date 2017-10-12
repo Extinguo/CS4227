@@ -24,6 +24,7 @@ public class Level {
 
     private int width;
     private int height;
+    final private int BLOCKSIZE = 32;
 
     private Tile[][] tiles;
     private List<Apple> apples;
@@ -47,14 +48,13 @@ public class Level {
                 for (int yy = 0; yy < height; yy++) {
                     int val = pixels[xx + (yy * width)];
                     if (val == 0xFF000000) {
-                        tiles[xx][yy] = new Tile(xx * 32, yy * 32);
+                        tiles[xx][yy] = new Tile(xx * BLOCKSIZE, yy * BLOCKSIZE);
                     } else if (val == 0xFF0000FF) {
-                        controller.getPlayer().x = xx * 32;
-                        controller.getPlayer().y = yy * 32;
+                        controller.setPlayer(new Player(xx*BLOCKSIZE, yy*BLOCKSIZE));
                     } else if(val == 0xFFFF0000) {
-                        enemys.add(new Enemy(xx*32, yy*32));
+                        enemys.add(new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE));
                     } else {
-                        apples.add(new Apple(xx * 32, yy * 32));
+                        apples.add(new Apple(xx * BLOCKSIZE, yy * BLOCKSIZE));
                     }
                 }
             }
