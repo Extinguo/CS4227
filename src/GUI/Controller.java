@@ -7,6 +7,14 @@ package GUI;
 
 import GameObjects.Helper;
 import GameObjects.Helper.Direction;
+import MoveStrategy.Command;
+import MoveStrategy.DownCommand;
+import MoveStrategy.Invoker;
+import MoveStrategy.LeftCommand;
+import MoveStrategy.PlayerMovementsListener;
+import MoveStrategy.Receiver;
+import MoveStrategy.RightCommand;
+import MoveStrategy.UpCommand;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.logging.Level;
@@ -27,15 +35,15 @@ public class Controller implements Runnable {
     private boolean isRunning = false;
     private Thread thread;
 
-    public Controller(Model model, View view) {
+    public Controller(Model model, View view, String path) {
         this.model = model;
         this.view  = view;
-        view.addPlayerMovementsListener(new PlayerMovementsListener());
+        view.addPlayerMovementsListener(new PlayerMovementsListener(this));
         
         player = new GameObjects.Player(view.getWidth()/2, view.getHeight()/2);
         
         level = new GameObjects.Level(this);
-        level.loadLevel("map.png");
+        level.loadLevel(path);
     }
     
     public GameObjects.Player getPlayer() {
@@ -99,54 +107,70 @@ public class Controller implements Runnable {
     }
     
     
-    class PlayerMovementsListener implements KeyListener {
-
-        @Override
-        public void keyTyped(KeyEvent e) { }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            boolean up    = false;
-            boolean down  = false;
-            boolean right = false;
-            boolean left  = false;
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
-                    player.setDirectionStatus(Direction.up, true);
-                    break;
-                case KeyEvent.VK_DOWN:
-                    player.setDirectionStatus(Direction.down, true);
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    player.setDirectionStatus(Direction.right, true);
-                    break;
-                case KeyEvent.VK_LEFT:
-                    player.setDirectionStatus(Direction.left, true);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) { 
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_UP:
-                    player.setDirectionStatus(Direction.up, false);
-                    break;
-                case KeyEvent.VK_DOWN:
-                    player.setDirectionStatus(Direction.down, false);
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    player.setDirectionStatus(Direction.right, false);
-                    break;
-                case KeyEvent.VK_LEFT:
-                    player.setDirectionStatus(Direction.left, false);
-                    break;
-                default:
-                    break;
-            }
-        }
-        
-    }
+//    class PlayerMovementsListener implements KeyListener {
+//        
+//        Receiver receiver = new Receiver();
+//        Invoker invoker   = new Invoker();
+//
+//        @Override
+//        public void keyTyped(KeyEvent e) { }
+//
+//        @Override
+//        public void keyPressed(KeyEvent e) {
+//            boolean up    = false;
+//            boolean down  = false;
+//            boolean right = false;
+//            boolean left  = false;
+//            switch (e.getKeyCode()) {
+//                case KeyEvent.VK_UP:
+//                    Command upCommand = new UpCommand(receiver);
+//                    invoker.setUpCommand(upCommand);
+//                    invoker.up();
+////                    player.setDirectionStatus(Direction.up, true);
+//                    break;
+//                case KeyEvent.VK_DOWN:
+//                    Command downCmd = new DownCommand(receiver);
+//                    invoker.setDownCommand(downCmd);
+//                    invoker.down();
+////                    player.setDirectionStatus(Direction.down, true);
+//                    break;
+//                case KeyEvent.VK_RIGHT:
+//                    Command leftCmd = new LeftCommand(receiver);
+//                    invoker.setLeftCommand(leftCmd);
+//                    invoker.left();
+////                    player.setDirectionStatus(Direction.right, true);
+//                    break;
+//                case KeyEvent.VK_LEFT:
+//                    Command rightCmd = new RightCommand(receiver);
+//                    invoker.setRightCommand(rightCmd);
+//                    invoker.right();
+////                    player.setDirectionStatus(Direction.left, true);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//
+//        @Override
+//        public void keyReleased(KeyEvent e) { 
+//            switch (e.getKeyCode()) {
+//                case KeyEvent.VK_UP:
+//                    player.setDirectionStatus(Direction.up, false);
+//                    break;
+//                case KeyEvent.VK_DOWN:
+//                    player.setDirectionStatus(Direction.down, false);
+//                    break;
+//                case KeyEvent.VK_RIGHT:
+//                    player.setDirectionStatus(Direction.right, false);
+//                    break;
+//                case KeyEvent.VK_LEFT:
+//                    player.setDirectionStatus(Direction.left, false);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//        
+//    }
+    
 }

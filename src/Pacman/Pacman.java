@@ -23,9 +23,8 @@ public class Pacman {
                 
         View view = new View();
         Model model = new Model();
-        Controller controller = new Controller(model, view);
+        Controller controller = new Controller(model, view, "map.png");
         view.setController(controller);
-        
         
         JFrame frame = new JFrame("PacMan");
         frame.add(view);
