@@ -1,6 +1,7 @@
 Implemented Pattern:
   - Model View Controller
   - Command
+  
 ToDo:
   - Add Factory Pattern
   - Interceptor
