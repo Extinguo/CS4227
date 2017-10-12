@@ -1,2 +1,7 @@
-Started PacMan from scratch. 
-It now uses the Model-View-Controller. I will add documentation soon, as well as the Factory Method & the Command Pattern.
+Implemented Pattern:
+  - Model View Controller
+  - Command
+ToDo:
+  - Add Factory Pattern
+  - Interceptor
+  - Ask JJ if that is correct so far.
