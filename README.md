@@ -3,6 +3,6 @@ Implemented Pattern:
   - Command
   
 ToDo:
-  - Add Factory Pattern
+  - Add Factory Method
+  - Add Bridge Pattern
   - Interceptor
-  - Ask JJ if that is correct so far.
