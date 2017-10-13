@@ -14,7 +14,9 @@ import java.awt.Rectangle;
  *
  * @author Magd
  */
-public class Player extends Rectangle {
+public class Player {
+    
+    Rectangle me;
 
     public boolean right = false;
     private boolean left = false;
@@ -23,20 +25,20 @@ public class Player extends Rectangle {
     private int speed   = 4;
 
     public Player(int x, int y) {
-        setBounds(x, y, 32, 32);
+        me = new Rectangle(x, y, 32, 32);
     }
 
     public void render(Graphics g) {
         g.setColor(Color.yellow);
-        g.fillRect(x, y, width, height);
+        g.fillRect(me.x, me.y, me.width, me.height);
 
     }
 
     public void tick() {
-        if (up)        { y -= speed; } 
-        else if (down) { y += speed; }
-        else if (right){ x += speed; } 
-        else if (left) { x -= speed; } 
+        if (up)        { me.y -= speed; } 
+        else if (down) { me.y += speed; }
+        else if (right){ me.x += speed; } 
+        else if (left) { me.x -= speed; } 
     }
     
     public void setDirectionStatus(Direction direction, boolean status) {
@@ -47,12 +49,5 @@ public class Player extends Rectangle {
             case left:  left = status;  break;
             default: break;
         }
-    }
-    
-    public void setDirections(boolean up, boolean down, boolean right, boolean left) {
-        this.up    = up;
-        this.down  = down;
-        this.right = right;
-        this.left  = left;
     }
 }

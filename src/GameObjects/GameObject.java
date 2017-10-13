@@ -13,15 +13,19 @@ import java.awt.Rectangle;
  *
  * @author Magd
  */
-public class Tile extends Rectangle {
+public class GameObject {
     
-    public Tile(int x, int y) {
-        setBounds(x, y, 32, 32);
+    Rectangle me;
+    Color color;
+    
+    GameObject(int x, int y, int width, int height, Color color) {
+        me = new Rectangle(x, y, width, height);
+        this.color = color;
     }
     
     public void render(Graphics g) {
-        g.setColor(new Color(33, 0, 127));
-        g.fillRect(x, y, width, height);
+        g.setColor(color);
+        g.fillRect(me.x, me.y, me.width, me.height);
     }
     
 }

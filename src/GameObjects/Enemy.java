@@ -13,14 +13,17 @@ import java.awt.Rectangle;
  *
  * @author Magd
  */
-public class Enemy extends Rectangle {
+public class Enemy {
+    
+    Rectangle me;
+    
     public Enemy(int x, int y) {
-        setBounds(x, y, 32, 32);
+        me = new Rectangle(x, y, 32, 32);
     }
     
     public void render(Graphics g) {
         g.setColor(Color.red);
-        g.fillRect(x, y, width, height);
+        g.fillRect(me.x, me.y, me.width, me.height);
     }
     
     public void tick() {

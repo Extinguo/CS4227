@@ -21,13 +21,18 @@ import javax.imageio.ImageIO;
 public class Level {
 
     Controller controller;
+    
+    private final int BLOCKSIZE = 32;
+    private final int tileColorInPNG   = 0xFF000000;
+    private final int playerCclorInPNG = 0xFF0000FF;
+    private final int enemyColorInPNG  = 0xFFFF0000;
 
     private int width;
     private int height;
-    final private int BLOCKSIZE = 32;
 
-    private Tile[][] tiles;
-    private List<Apple> apples;
+    private GameObject[][] walls;
+    private List<GameObject> beans;
+    
     public List<Enemy> enemys;
 
     public Level(Controller controller) {
@@ -35,26 +40,31 @@ public class Level {
     }
 
     public void loadLevel(String path) {
-        apples = new ArrayList<>();
+        beans = new ArrayList<>();
         enemys = new ArrayList<>();
         try {
             BufferedImage map = ImageIO.read(getClass().getResource(path));
             this.width = map.getWidth();
             this.height = map.getHeight();
             int[] pixels = new int[width * height];
-            tiles = new Tile[width][height];
+            walls = new GameObject[width][height];
             map.getRGB(0, 0, width, height, pixels, 0, width);
             for (int xx = 0; xx < width; xx++) {
                 for (int yy = 0; yy < height; yy++) {
                     int val = pixels[xx + (yy * width)];
-                    if (val == 0xFF000000) {
-                        tiles[xx][yy] = new Tile(xx * BLOCKSIZE, yy * BLOCKSIZE);
-                    } else if (val == 0xFF0000FF) {
-                        controller.setPlayer(new Player(xx*BLOCKSIZE, yy*BLOCKSIZE));
-                    } else if(val == 0xFFFF0000) {
-                        enemys.add(new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE));
-                    } else {
-                        apples.add(new Apple(xx * BLOCKSIZE, yy * BLOCKSIZE));
+                    switch (val) {
+                        case tileColorInPNG:
+                            walls[xx][yy] = GameObjectFactory.createWall(xx * BLOCKSIZE, yy * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE);
+                            break;
+                        case playerCclorInPNG:
+                            controller.setPlayer(new Player(xx*BLOCKSIZE, yy*BLOCKSIZE));
+                            break;
+                        case enemyColorInPNG:
+                            enemys.add(new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE));
+                            break;
+                        default:
+                            beans.add(GameObjectFactory.createBean(xx * BLOCKSIZE, yy * BLOCKSIZE));
+                            break;
                     }
                 }
             }
@@ -66,14 +76,14 @@ public class Level {
     public void render(Graphics g) {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (tiles[x][y] != null) {
-                    tiles[x][y].render(g);
+                if (walls[x][y] != null) {
+                    walls[x][y].render(g);
                 }
             }
         }
 
-        for (Apple a : apples) {
-            a.render(g);
+        for (GameObject bean : beans) {
+            bean.render(g);
         }
         
         for(Enemy e : enemys) {
@@ -85,6 +95,10 @@ public class Level {
         for(Enemy e : enemys) {
             e.tick();
         }
+    }
+    
+    public GameObject[][] getWalls() {
+        return walls;
     }
 
 }
