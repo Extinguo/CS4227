@@ -1,8 +1,7 @@
 package MoveStrategy;
 
 import GameObjects.Helper;
-import GameObjects.Level;
-import GameObjects.Player;
+import GameObjects.Player.Player;
 
 public class UpCommand implements Command {
 

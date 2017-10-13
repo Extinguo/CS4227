@@ -1,7 +1,7 @@
 package MoveStrategy;
 
 import GameObjects.Helper;
-import GameObjects.Player;
+import GameObjects.Player.Player;
 
 public class RightCommand implements Command {
 

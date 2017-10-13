@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import GameObjects.Player.Player;
 import MoveStrategy.PlayerMovementsListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +36,7 @@ public class Controller implements Runnable {
         model.getLevel().loadLevel(path);
     }
 
-    public GameObjects.Player getPlayer() {
+    public Player getPlayer() {
         return model.getPlayer();
     }
 
@@ -71,7 +72,7 @@ public class Controller implements Runnable {
         }
     }
 
-    public void setPlayer(GameObjects.Player player) {
+    public void setPlayer(Player player) {
         model.setPlayer(player);
     }
     

@@ -6,7 +6,7 @@
 package GUI;
 
 import GameObjects.Level;
-import GameObjects.Player;
+import GameObjects.Player.Player;
 
 /**
  *

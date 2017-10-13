@@ -6,6 +6,7 @@
 package GameObjects;
 
 import GUI.Controller;
+import GameObjects.Player.PlayerFactory;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -57,7 +58,8 @@ public class Level {
                             walls[xx][yy] = GameObjectFactory.createWall(xx * BLOCKSIZE, yy * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE);
                             break;
                         case playerCclorInPNG:
-                            controller.setPlayer(new Player(xx*BLOCKSIZE, yy*BLOCKSIZE));
+                            controller.setPlayer(PlayerFactory.createPlayerWithSpeed(xx*BLOCKSIZE, yy*BLOCKSIZE, BLOCKSIZE, BLOCKSIZE));
+//                            controller.setPlayer(new Player_Old(xx*BLOCKSIZE, yy*BLOCKSIZE));
                             break;
                         case enemyColorInPNG:
                             enemys.add(new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE));
