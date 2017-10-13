@@ -16,12 +16,21 @@ import java.awt.event.KeyListener;
 public class PlayerMovementsListener implements KeyListener {
 
     Controller controller;
-
+    Invoker invoker;
+    
+    Command upCommand;
+    Command downCmd;
+    Command rightCmd; 
+    Command leftCmd;
+    
     public PlayerMovementsListener(Controller controller) {
         this.controller = controller;
+        invoker = new Invoker();
+        
+        if(controller.getPlayer() != null ) {
+            initialiseCommands();
+        }
     }
-
-    Invoker invoker = new Invoker();
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -29,29 +38,21 @@ public class PlayerMovementsListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        boolean up = false;
-        boolean down = false;
-        boolean right = false;
-        boolean left = false;
+        if(upCommand == null) {
+            initialiseCommands();
+        }
+        
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                Command upCommand = new UpCommand(controller.getPlayer());
-                invoker.setUpCommand(upCommand);
                 invoker.up();
                 break;
             case KeyEvent.VK_DOWN:
-                Command downCmd = new DownCommand(controller.getPlayer());
-                invoker.setDownCommand(downCmd);
                 invoker.down();
                 break;
             case KeyEvent.VK_RIGHT:
-                Command rightCmd = new RightCommand(controller.getPlayer());
-                invoker.setRightCommand(rightCmd);
                 invoker.right();
                 break;
             case KeyEvent.VK_LEFT:
-                Command leftCmd = new LeftCommand(controller.getPlayer());
-                invoker.setLeftCommand(leftCmd);
                 invoker.left();
                 break;
             default:
@@ -61,30 +62,35 @@ public class PlayerMovementsListener implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if(upCommand == null) {
+            initialiseCommands();
+        }
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                Command upCommand = new UpCommand(controller.getPlayer());
-                invoker.setUpCommand(upCommand);
                 invoker.undoUp();
                 break;
             case KeyEvent.VK_DOWN:
-                Command downCmd = new DownCommand(controller.getPlayer());
-                invoker.setDownCommand(downCmd);
                 invoker.undoDown();
                 break;
             case KeyEvent.VK_RIGHT:
-                Command rightCmd = new RightCommand(controller.getPlayer());
-                invoker.setRightCommand(rightCmd);
                 invoker.undoRight();
                 break;
             case KeyEvent.VK_LEFT:
-                Command leftCmd = new LeftCommand(controller.getPlayer());
-                invoker.setLeftCommand(leftCmd);
                 invoker.undoLeft();
                 break;
             default:
                 break;
         }
     }
-
+    
+    private void initialiseCommands() {
+        upCommand = new UpCommand(controller.getPlayer());
+        downCmd = new DownCommand(controller.getPlayer());
+        rightCmd = new RightCommand(controller.getPlayer());
+        leftCmd = new LeftCommand(controller.getPlayer());
+        invoker.setUpCommand(upCommand);
+        invoker.setDownCommand(downCmd);
+        invoker.setRightCommand(rightCmd);
+        invoker.setLeftCommand(leftCmd);
+    }
 }

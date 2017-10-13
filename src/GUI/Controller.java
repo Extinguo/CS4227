@@ -26,14 +26,16 @@ public class Controller implements Runnable {
     public Controller(Model model, View view, String path) {
         this.model = model;
         this.view = view;
-        view.addPlayerMovementsListener(new PlayerMovementsListener(this));
 
         model.setLevel(new GameObjects.Level(this));
 
+        
         // Loads the level. Since the players are loaded with the map there 
         // the player reference is null until after this.
         // We assume that a valid map will be loaded.
         model.getLevel().loadLevel(path);
+        
+        view.addPlayerMovementsListener(new PlayerMovementsListener(this));
     }
 
     public Player getPlayer() {
