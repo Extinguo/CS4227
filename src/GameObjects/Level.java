@@ -5,11 +5,11 @@
  */
 package GameObjects;
 
-import CollisionDetection.MyCollisionDetection;
-import CollisionDetection.OtherCollisionDetection;
+import CollisionDetection.WallCollisionDetection;
 import GUI.Controller;
+import GameObjects.Player.Attributes.Speed;
+import GameObjects.Player.Player;
 import GameObjects.Player.PlayerFactory;
-import Pacman.Pacman;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -67,7 +67,9 @@ public class Level {
                             walls[xx][yy] = GameObjectFactory.createWall(xx * BLOCKSIZE, yy * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE);
                             break;
                         case playerCclorInPNG:
-                            controller.setPlayer(PlayerFactory.createPlayerWithSpeed(xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-6, BLOCKSIZE-6, new MyCollisionDetection(this)));
+                            Player playerWithSpeed = PlayerFactory.createPlayerWithSpeed(xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-6, BLOCKSIZE-6);
+                            ((Speed)(playerWithSpeed)).setWallCollision(new WallCollisionDetection(this));
+                            controller.setPlayer(playerWithSpeed);
                             break;
                         case enemyColorInPNG:
                             enemys.add(new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE));
@@ -109,6 +111,10 @@ public class Level {
     
     public GameObject[][] getWalls() {
         return walls;
+    }
+    
+    public List<GameObject> getBeans() {
+        return beans;
     }
 
 }

@@ -22,11 +22,13 @@ public interface Player {
     public int getY();
     public List<PlayerDecorator> getDecorators();
     public Rectangle getBounds();
+    public int getScore();
     
     public void setLifes(int lifes);
     public void setX(int x);
     public void setY(int y);
     public void setDirectionStatus(Helper.Direction direction, boolean b);
+    public void setScore(int score);
     
     public void tick();
     public void render(Graphics g);

@@ -12,21 +12,15 @@ import GameObjects.Level;
  *
  * @author Magd
  */
-public class OtherCollisionDetection extends CollisionDetection {
+public class BeanCollisionDetection extends CollisionDetection {
 
-    public OtherCollisionDetection(Level level) {
+    public BeanCollisionDetection(Level level) {
         super(level);
     }
 
-    
-    
-
     @Override
     public boolean collisionHappening(Helper.Direction direction) {
-        
-        
-        
-        return false;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -20,6 +20,7 @@ public class PlainPlayer implements Player {
     
     private String name = "RandomName";
     private int lifes = 3;
+    private int score = 0;
     private List<PlayerDecorator> decorators;
     private Rectangle me;  
     
@@ -48,6 +49,8 @@ public class PlainPlayer implements Player {
     public List<PlayerDecorator> getDecorators() { return decorators; }
     @Override
     public Rectangle getBounds() { return me; }
+    @Override
+    public int getScore() { return this.score; }
 
     @Override
     public void setLifes(int lifes) { this.lifes = lifes; }
@@ -55,6 +58,8 @@ public class PlainPlayer implements Player {
     public void setX(int x) { me.x = x; }
     @Override
     public void setY(int y) { me.y = y; }
+    @Override
+    public void setScore(int score) { this.score = score; }
     
     @Override
     public void render(Graphics g) {

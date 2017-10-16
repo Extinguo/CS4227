@@ -32,6 +32,8 @@ public abstract class PlayerDecorator implements Player {
     public List<PlayerDecorator> getDecorators() { return tempPlayer.getDecorators(); }
     @Override
     public Rectangle getBounds() { return tempPlayer.getBounds(); }
+    @Override
+    public int getScore() { return tempPlayer.getScore(); }
 
     @Override
     public void setLifes(int lifes) { tempPlayer.setLifes(lifes); }
@@ -43,6 +45,8 @@ public abstract class PlayerDecorator implements Player {
     public void setDirectionStatus(Helper.Direction direction, boolean b) {
         tempPlayer.setDirectionStatus(direction, b);
     }
+    @Override
+    public void setScore(int score) { tempPlayer.setScore(score); }
     
     
     

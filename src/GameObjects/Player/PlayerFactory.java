@@ -22,8 +22,8 @@ public class PlayerFactory {
         return new PlainPlayer(name, lifes, x, y, width, height);
     }
     
-    public static Player createPlayerWithSpeed(int x, int y, int width, int height, CollisionDetection collisionDetection) {
-        return new Speed(new PlainPlayer(x, y, width, height), 4, collisionDetection);
+    public static Player createPlayerWithSpeed(int x, int y, int width, int height) {
+        return new Speed(new PlainPlayer(x, y, width, height), 4);
     }
     
 }
