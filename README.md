@@ -2,6 +2,7 @@ Implemented Pattern:
   - Model View Controller
   - Command
   - Factory Method
+  - Bridge 
   
   (- Decorator [Player])
   
