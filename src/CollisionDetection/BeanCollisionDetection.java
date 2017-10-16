@@ -22,5 +22,19 @@ public class BeanCollisionDetection extends CollisionDetection {
     public boolean collisionHappening(Helper.Direction direction) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    public void Eatbean()
+    {
+        for(int i=0;i<this.level.getBeans().size();i++)
+        {
+            if(player.getBounds().intersects(level.getBeans().get(i).getBounds()))
+            {
+                level.getBeans().remove(i);
+                player.setEatbeans(player.getEatbeans()+1);
+                System.out.println("Bacman have eaten "+player.getEatbeans()+"beans");
+                break;
+            }
+        }
+    }
+
     
 }

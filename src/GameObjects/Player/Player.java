@@ -33,5 +33,6 @@ public interface Player {
     public void tick();
     public void render(Graphics g);
 
-    
+    public int getEatbeans();
+    public void setEatbeans(int eatbeans);
 }

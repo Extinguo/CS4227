@@ -5,6 +5,7 @@
  */
 package GameObjects;
 
+import CollisionDetection.BeanCollisionDetection;
 import CollisionDetection.WallCollisionDetection;
 import GUI.Controller;
 import GameObjects.Player.Attributes.Speed;
@@ -12,12 +13,15 @@ import GameObjects.Player.Player;
 import GameObjects.Player.PlayerFactory;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 /**
  *
@@ -51,9 +55,11 @@ public class Level {
             
             
             URL location = Level.class.getProtectionDomain().getCodeSource().getLocation();
+            System.out.println(location.toString());
             String path = location.getPath().replace("build/classes/", "Ressources/" + filename);
-            
-            BufferedImage map = ImageIO.read(new URL(location, path));
+            System.out.print(path);
+            BufferedImage map=ImageIO.read(new FileInputStream("E:/map.png"));
+            //BufferedImage map = ImageIO.read(new URL(location, path));
             this.width = map.getWidth();
             this.height = map.getHeight();
             int[] pixels = new int[width * height];
@@ -68,7 +74,7 @@ public class Level {
                             break;
                         case playerCclorInPNG:
                             Player playerWithSpeed = PlayerFactory.createPlayerWithSpeed(xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-6, BLOCKSIZE-6);
-                            ((Speed)(playerWithSpeed)).setWallCollision(new WallCollisionDetection(this));
+                            ((Speed)(playerWithSpeed)).setWallCollisionAndBeanCollision(new WallCollisionDetection(this),new BeanCollisionDetection(this));
                             controller.setPlayer(playerWithSpeed);
                             break;
                         case enemyColorInPNG:

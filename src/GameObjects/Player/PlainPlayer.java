@@ -21,6 +21,7 @@ public class PlainPlayer implements Player {
     private String name = "RandomName";
     private int lifes = 3;
     private int score = 0;
+    private int eatBeans=0;
     private List<PlayerDecorator> decorators;
     private Rectangle me;  
     
@@ -65,6 +66,16 @@ public class PlainPlayer implements Player {
     public void render(Graphics g) {
         g.setColor(Color.yellow);
         g.fillRect(me.x, me.y, me.width, me.height);
+    }
+
+    @Override
+    public int getEatbeans() {
+        return eatBeans;
+    }
+
+    @Override
+    public void setEatbeans(int eatbeans) {
+        this.eatBeans=eatbeans;
     }
 
     @Override

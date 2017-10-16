@@ -33,6 +33,7 @@ public class Speed extends PlayerDecorator {
         super(newPlayer);
         super.getDecorators().add(this);
         this.speed = speed;
+        this.setEatbeans(newPlayer.getEatbeans());
     }
 
     @Override
@@ -54,9 +55,20 @@ public class Speed extends PlayerDecorator {
         } if (left) { 
             if(!wallCollision.collisionHappening(Direction.left))
                 super.setX(super.getX()-speed); 
-        } 
+        }
+        beanCollision.Eatbean();
     }
-    
+
+    @Override
+    public int getEatbeans() {
+        return tempPlayer.getEatbeans();
+    }
+
+    @Override
+    public void setEatbeans(int eatbeans) {
+         tempPlayer.setEatbeans(eatbeans);
+    }
+
     public void setSpeed(int speed) { this.speed = speed; }
     
     @Override
@@ -74,13 +86,15 @@ public class Speed extends PlayerDecorator {
         return speed;
     }
     
-    public void setWallCollision(WallCollisionDetection wallCollision) {
+    public void setWallCollisionAndBeanCollision(WallCollisionDetection wallCollision,BeanCollisionDetection beanCollision) {
         this.wallCollision = wallCollision;
+        this.beanCollision=beanCollision;
         wallCollision.setPlayer(this);
+        beanCollision.setPlayer(this);
     }
     
     public WallCollisionDetection getWallCollision() {
         return wallCollision;
     }
-    
+    public BeanCollisionDetection getBeanCollision() { return beanCollision; }
 }
