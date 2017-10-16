@@ -5,6 +5,7 @@
  */
 package GameObjects.Player;
 
+import CollisionDetection.CollisionDetection;
 import GameObjects.Player.Attributes.Speed;
 
 /**
@@ -21,9 +22,8 @@ public class PlayerFactory {
         return new PlainPlayer(name, lifes, x, y, width, height);
     }
     
-    
-    public static Player createPlayerWithSpeed(int x, int y, int width, int height) {
-        return new Speed(new PlainPlayer(x, y, width, height), 4);
+    public static Player createPlayerWithSpeed(int x, int y, int width, int height, CollisionDetection collisionDetection) {
+        return new Speed(new PlainPlayer(x, y, width, height), 4, collisionDetection);
     }
     
 }

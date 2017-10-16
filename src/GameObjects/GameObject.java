@@ -28,4 +28,8 @@ public class GameObject {
         g.fillRect(me.x, me.y, me.width, me.height);
     }
     
+    public Rectangle getBounds() {
+        return me;
+    }
+    
 }

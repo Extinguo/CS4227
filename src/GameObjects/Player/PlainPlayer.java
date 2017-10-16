@@ -46,6 +46,8 @@ public class PlainPlayer implements Player {
     public int getY() { return me.y; }
     @Override
     public List<PlayerDecorator> getDecorators() { return decorators; }
+    @Override
+    public Rectangle getBounds() { return me; }
 
     @Override
     public void setLifes(int lifes) { this.lifes = lifes; }

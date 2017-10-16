@@ -5,7 +5,9 @@
  */
 package GameObjects.Player.Attributes;
 
+import CollisionDetection.CollisionDetection;
 import GameObjects.Helper;
+import GameObjects.Helper.Direction;
 import GameObjects.Player.Player;
 import GameObjects.Player.PlayerDecorator;
 import java.util.List;
@@ -22,11 +24,14 @@ public class Speed extends PlayerDecorator {
     private boolean down = false;
     
     int speed;
+    CollisionDetection collisionDetection;
 
-    public Speed(Player newPlayer, int speed) {
+    public Speed(Player newPlayer, int speed, CollisionDetection collisionDetection ) {
         super(newPlayer);
         super.getDecorators().add(this);
         this.speed = speed;
+        this.collisionDetection = collisionDetection;
+        this.collisionDetection.setPlayer(this);
     }
 
     @Override
@@ -36,10 +41,19 @@ public class Speed extends PlayerDecorator {
     
     @Override
     public void tick() {
-        if (up)        { super.setY(super.getY()-speed); } 
-        else if (down) { super.setY(super.getY()+speed); }
-        else if (right){ super.setX(super.getX()+speed); } 
-        else if (left) { super.setX(super.getX()-speed); } 
+        if (up) {
+            if(!collisionDetection.collisionHappening(Direction.up))
+                super.setY(super.getY()-speed); 
+        } if (down) {
+            if(!collisionDetection.collisionHappening(Direction.down))
+                super.setY(super.getY()+speed); 
+        } if (right) { 
+            if(!collisionDetection.collisionHappening(Direction.right))
+                super.setX(super.getX()+speed); 
+        } if (left) { 
+            if(!collisionDetection.collisionHappening(Direction.left))
+                super.setX(super.getX()-speed); 
+        } 
     }
     
     public void setSpeed(int speed) { this.speed = speed; }

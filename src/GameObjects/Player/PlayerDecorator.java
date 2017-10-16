@@ -7,6 +7,7 @@ package GameObjects.Player;
 
 import GameObjects.Helper;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.List;
 
 /**
@@ -29,6 +30,8 @@ public abstract class PlayerDecorator implements Player {
     public int getY() { return tempPlayer.getY(); }
     @Override
     public List<PlayerDecorator> getDecorators() { return tempPlayer.getDecorators(); }
+    @Override
+    public Rectangle getBounds() { return tempPlayer.getBounds(); }
 
     @Override
     public void setLifes(int lifes) { tempPlayer.setLifes(lifes); }

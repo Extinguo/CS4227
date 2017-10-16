@@ -5,11 +5,15 @@
  */
 package GameObjects;
 
+import CollisionDetection.MyCollisionDetection;
+import CollisionDetection.OtherCollisionDetection;
 import GUI.Controller;
 import GameObjects.Player.PlayerFactory;
+import Pacman.Pacman;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -40,11 +44,16 @@ public class Level {
         this.controller = controller;
     }
 
-    public void loadLevel(String path) {
+    public void loadLevel(String filename) {
         beans = new ArrayList<>();
         enemys = new ArrayList<>();
         try {
-            BufferedImage map = ImageIO.read(getClass().getResource(path));
+            
+            
+            URL location = Level.class.getProtectionDomain().getCodeSource().getLocation();
+            String path = location.getPath().replace("build/classes/", "Ressources/" + filename);
+            
+            BufferedImage map = ImageIO.read(new URL(location, path));
             this.width = map.getWidth();
             this.height = map.getHeight();
             int[] pixels = new int[width * height];
@@ -58,8 +67,7 @@ public class Level {
                             walls[xx][yy] = GameObjectFactory.createWall(xx * BLOCKSIZE, yy * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE);
                             break;
                         case playerCclorInPNG:
-                            controller.setPlayer(PlayerFactory.createPlayerWithSpeed(xx*BLOCKSIZE, yy*BLOCKSIZE, BLOCKSIZE, BLOCKSIZE));
-//                            controller.setPlayer(new Player_Old(xx*BLOCKSIZE, yy*BLOCKSIZE));
+                            controller.setPlayer(PlayerFactory.createPlayerWithSpeed(xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-6, BLOCKSIZE-6, new MyCollisionDetection(this)));
                             break;
                         case enemyColorInPNG:
                             enemys.add(new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE));

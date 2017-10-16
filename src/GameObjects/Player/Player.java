@@ -7,6 +7,7 @@ package GameObjects.Player;
 
 import GameObjects.Helper;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.List;
 
 /**
@@ -20,6 +21,7 @@ public interface Player {
     public int getX();
     public int getY();
     public List<PlayerDecorator> getDecorators();
+    public Rectangle getBounds();
     
     public void setLifes(int lifes);
     public void setX(int x);
