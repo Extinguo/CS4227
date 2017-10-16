@@ -9,7 +9,6 @@ import GameObjects.Player.Player;
 import MoveStrategy.PlayerMovementsListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,18 +22,18 @@ public class Controller implements Runnable {
     private final int TARGET_FPS = 60;
     private boolean isRunning = false;
     private Thread thread;
-
-    public Controller(Model model, View view, String path) {
+    
+    
+    /**
+     * Registers the model and view at the Controller in the constructor.
+     * Also adds the PlayerMovementsListener to the view and controls it.
+     * 
+     * @param model The model which contains/will contain the data for the view
+     * @param view The view to control
+     */
+    public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
-
-        model.setLevel(new GameObjects.Level(this));
-
-        
-        // Loads the level. Since the players are loaded with the map there 
-        // the player reference is null until after this.
-        // We assume that a valid map will be loaded.
-        model.getLevel().loadLevel(path);
         
         view.addPlayerMovementsListener(new PlayerMovementsListener(this));
     }
@@ -46,13 +45,24 @@ public class Controller implements Runnable {
     public GameObjects.Level getLevel() {
         return model.getLevel();
     }
+    
+    public void setPlayer(Player player) {
+        model.setPlayer(player);
+    }
 
+    /**
+     * Since the class implements Runnable this method has to be overriden. It calls 
+     * the gameloop and requests focus for the view-Window. 
+     */
     @Override
     public void run() {
         view.requestFocus();
-        gameloopv2();
+        gameloop();
     }
 
+    /**
+     * Starts the Game in a new thread
+     */
     public synchronized void start() {
         if (isRunning) {
             return;
@@ -62,7 +72,10 @@ public class Controller implements Runnable {
         thread.start();
 
     }
-
+    
+    /**
+     * Stops the Game and sets the thread to sleep
+     */
     public synchronized void stop() {
         if (!isRunning) {
             return;
@@ -74,42 +87,18 @@ public class Controller implements Runnable {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public void setPlayer(Player player) {
-        model.setPlayer(player);
-    }
     
-    
-    
-    // Unknown
-    private void gameloopv1() {
-        int fps = 0;
-        double timer = System.currentTimeMillis();
-        long lastTime = System.nanoTime();
-        double delta = 0;
-        double ns = 1000000000 / TARGET_FPS;
-
-        while (isRunning) {
-            long now = System.nanoTime();
-            delta += (now - lastTime) / ns;
-            lastTime = now;
-            while (delta >= 1) {
-                model.getLevel().tick();
-                model.getPlayer().tick();
-                view.render();
-                fps++;
-                delta--;
-            }
-            if (System.currentTimeMillis() - timer >= 1000) {
-                System.out.println(fps);
-                fps = 0;
-                timer += 1000;
-            }
-        }
-    }
-    
-    // Kevin Glass - http://www.java-gaming.org/index.php?topic=24220.0
-    private void gameloopv2() {
+    /**
+     * The Gameloop that triggers the tick()-methods in the level and player classes.
+     * It also triggers the view to render.
+     * The target-FPS is a final int, default: 60. This means that the game renders
+     * 60 times per secound. 
+     * 
+     * Notice: The Gameloop was copien from the following website, all rights go
+     * to Kevin Glass
+     * http://www.java-gaming.org/index.php?topic=24220.0
+     */
+    private void gameloop() {
         
         long lastLoopTime = System.nanoTime();
         final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;

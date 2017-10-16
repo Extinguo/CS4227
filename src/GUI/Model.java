@@ -15,11 +15,34 @@ import GameObjects.Player.Player;
 public class Model {
     
     Controller controller;
-    
     Player player;
     Level level;
 
-    public Model() {
+    /**
+     * Creates a level instance, however, at this point there is no informaton,
+     * since there is no file to load.
+     */
+    public Model() { 
+        level = new Level();
+    }
+
+    /**
+     * Creates a new Level and loads it. Also sets the player.
+     * @param filename Filename of the file with the level date. Is is expected that the file is located in the Ressources folder.
+     */
+    public Model(String filename) {
+        level = new Level();
+        level.loadLevel(filename);
+        player = level.getPlayer();
+    }
+    
+    /**
+     * Loads the by the filename specified level
+     * @param filename Filename of the Level. The file is expected to be in the Ressources folder.
+     */
+    public void loadLevel(String filename) {
+        level.loadLevel(filename);
+        player = level.getPlayer();
     }
     
     public void setController(Controller controller) {

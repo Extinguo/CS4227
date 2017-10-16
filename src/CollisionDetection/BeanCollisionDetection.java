@@ -18,10 +18,15 @@ public class BeanCollisionDetection extends CollisionDetection {
         super(level);
     }
 
+    
     @Override
     public boolean collisionHappening(Helper.Direction direction) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    /**
+     * In case the player collides with a bean the bean will be eaten and the playerScore will increase.
+     */
     public void Eatbean()
     {
         for(int i=0;i<this.level.getBeans().size();i++)
@@ -30,10 +35,11 @@ public class BeanCollisionDetection extends CollisionDetection {
             {
                 level.getBeans().remove(i);
                 player.setEatbeans(player.getEatbeans()+1);
-                System.out.println("Bacman have eaten "+player.getEatbeans()+"beans");
+                System.out.println("Pacman has eaten "+player.getEatbeans()+" beans");
                 break;
             }
         }
+        player.setScore(player.getScore()+player.getEatbeans());
     }
 
     

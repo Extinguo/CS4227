@@ -23,6 +23,9 @@ public class View extends Canvas {
     private final int WIDTH = 640;
     private final int HEIGHT = 480;
 
+    /**
+     * Initialises the view by settings its dimension.
+     */
     public View() {
         Dimension dimension = new Dimension(WIDTH, HEIGHT);
         setPreferredSize(dimension);
@@ -30,6 +33,9 @@ public class View extends Canvas {
         setMaximumSize(dimension);
     }
 
+    /**
+     * Renders the view/new data. This method will be called by the controller.
+     */
     public void render() {
         BufferStrategy bs = getBufferStrategy();
         if (bs == null) {
