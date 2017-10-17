@@ -6,7 +6,6 @@
 package GameObjects.Player.Attributes;
 
 import CollisionDetection.BeanCollisionDetection;
-import CollisionDetection.CollisionDetection;
 import CollisionDetection.WallCollisionDetection;
 import GameObjects.Helper;
 import GameObjects.Helper.Direction;

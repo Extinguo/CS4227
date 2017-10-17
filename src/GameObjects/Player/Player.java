@@ -17,7 +17,7 @@ import java.util.List;
 public interface Player {
     
     public String getName();
-    public int    getLifes();
+    public int getLifes();
     public int getX();
     public int getY();
     public List<PlayerDecorator> getDecorators();

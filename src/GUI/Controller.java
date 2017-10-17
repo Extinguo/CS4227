@@ -140,7 +140,9 @@ public class Controller implements Runnable {
             // us our final value to wait for
             // remember this is in ms, whereas our lastLoopTime etc. vars are in ns.
             try {
-                Thread.sleep((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000);
+                long sleepTime = (lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000;
+                if(sleepTime > 0) 
+                    Thread.sleep((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
