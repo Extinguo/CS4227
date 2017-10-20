@@ -62,6 +62,7 @@ public class Level {
             //BufferedImage map = ImageIO.read(new URL(location, path));
             this.width = map.getWidth();
             this.height = map.getHeight();
+            System.out.print(map.getHeight()+"  "+map.getHeight());
             int[] pixels = new int[width * height];
             walls = new GameObject[width][height];
             map.getRGB(0, 0, width, height, pixels, 0, width);
@@ -86,6 +87,7 @@ public class Level {
                     }
                 }
             }
+            System.out.print("The number of Players:"+controller.getPlayers().size());
         } catch (IOException ex) {
             Logger.getLogger(Level.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

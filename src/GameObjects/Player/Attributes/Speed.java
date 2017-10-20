@@ -46,13 +46,13 @@ public class Speed extends PlayerDecorator {
         if (up) {
             if(!wallCollision.collisionHappening(Direction.up))
                 super.setY(super.getY()-speed); 
-        } if (down) {
+        }else if (down) {
             if(!wallCollision.collisionHappening(Direction.down))
                 super.setY(super.getY()+speed); 
-        } if (right) { 
+        }else if (right) {
             if(!wallCollision.collisionHappening(Direction.right))
                 super.setX(super.getX()+speed); 
-        } if (left) { 
+        }else if (left) {
             if(!wallCollision.collisionHappening(Direction.left))
                 super.setX(super.getX()-speed); 
         }
@@ -68,6 +68,12 @@ public class Speed extends PlayerDecorator {
     public void setEatbeans(int eatbeans) {
          tempPlayer.setEatbeans(eatbeans);
     }
+
+    @Override
+    public String getName(){return tempPlayer.getName();}
+
+    @Override
+    public void setName(String name){tempPlayer.setName(name);}
 
     public void setSpeed(int speed) { this.speed = speed; }
     

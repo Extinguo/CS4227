@@ -7,6 +7,8 @@ package GUI;
 
 import GameObjects.Player.Player;
 import MoveStrategy.PlayerMovementsListener;
+
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -39,8 +41,8 @@ public class Controller implements Runnable {
         view.addPlayerMovementsListener(new PlayerMovementsListener(this));
     }
 
-    public Player getPlayer() {
-        return model.getPlayer();
+    public List<Player> getPlayers() {
+        return model.getPlayers();
     }
 
     public GameObjects.Level getLevel() {
@@ -76,10 +78,9 @@ public class Controller implements Runnable {
     }
 
     public void setPlayer(Player player) {
-        model.setPlayer(player);
+        model.setPlayers(player);
     }
-    
-    
+
     
     // Unknown
     private void gameloopv1() {
@@ -95,7 +96,9 @@ public class Controller implements Runnable {
             lastTime = now;
             while (delta >= 1) {
                 model.getLevel().tick();
-                model.getPlayer().tick();
+                for(Player mplayer:model.getPlayers())
+                    mplayer.tick();
+//                model.getPlayer().tick();
                 view.render();
                 fps++;
                 delta--;
@@ -140,7 +143,9 @@ public class Controller implements Runnable {
 
             // update the game logic
             model.getLevel().tick();
-            model.getPlayer().tick();
+            for(Player mplayer:model.getPlayers())
+                mplayer.tick();
+//            model.getPlayer().tick();
 
             // draw everyting
             view.render();

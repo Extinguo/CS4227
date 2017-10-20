@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import GameObjects.Player.Player;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -39,8 +41,9 @@ public class View extends Canvas {
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.black);
         g.fillRect(0, 0, WIDTH, HEIGHT);
-        
-        controller.getPlayer().render(g);
+        for(Player mplayer:controller.getPlayers())
+            mplayer.render(g);
+//        controller.getPlayer().render(g);
         controller.getLevel().render(g);
 
         g.dispose();

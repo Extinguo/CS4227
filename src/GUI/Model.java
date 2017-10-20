@@ -8,6 +8,9 @@ package GUI;
 import GameObjects.Level;
 import GameObjects.Player.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Magd
@@ -15,29 +18,32 @@ import GameObjects.Player.Player;
 public class Model {
     
     Controller controller;
-    
-    Player player;
+    List<Player> players;
+//    Player List<player>;
+    //I just added a new player.
     Level level;
 
     public Model() {
+        players=new ArrayList<>();
     }
     
     public void setController(Controller controller) {
         this.controller = controller;
     }
     
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayers(Player player) {
+        this.players.add(player);
     }
     public void setLevel(Level level) {
         this.level = level;
     }
-    
-    public Player getPlayer() {
-        return player;
+
+    public List<Player> getPlayers() {
+        return players;
     }
     public Level getLevel() {
         return level;
     }
+
     
 }

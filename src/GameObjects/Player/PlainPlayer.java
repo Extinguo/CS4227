@@ -79,6 +79,12 @@ public class PlainPlayer implements Player {
     }
 
     @Override
+    public void setName(String name)
+    {
+        this.name=name;
+    }
+
+    @Override
     public void tick() { }
 
     @Override
