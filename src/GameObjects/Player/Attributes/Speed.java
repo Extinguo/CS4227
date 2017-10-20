@@ -25,7 +25,6 @@ public class Speed extends PlayerDecorator {
     private boolean down = false;
     
     int speed;
-    
     WallCollisionDetection wallCollision;
     BeanCollisionDetection beanCollision;
 
@@ -99,8 +98,16 @@ public class Speed extends PlayerDecorator {
         beanCollision.setPlayer(this);
     }
     
-    public WallCollisionDetection getWallCollision() {
-        return wallCollision;
+    public void setWallCollision (WallCollisionDetection wallCollision) {
+        this.wallCollision = wallCollision;
+        wallCollision.setPlayer(this);
     }
+    
+    public void setBeanCollision(BeanCollisionDetection beanCollision) {
+        this.beanCollision=beanCollision;
+        beanCollision.setPlayer(this);
+    }
+    
+    public WallCollisionDetection getWallCollision() { return wallCollision; }
     public BeanCollisionDetection getBeanCollision() { return beanCollision; }
 }

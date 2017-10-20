@@ -11,6 +11,9 @@ package GameObjects;
  */
 public class Helper {
     
+    /**
+     * Helps to tell in which direction the player is moving or wants to move.
+     */
     public enum Direction {
         up, down, right, left
     }

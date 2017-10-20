@@ -8,12 +8,6 @@ package Pacman;
 import GUI.Controller;
 import GUI.Model;
 import GUI.View;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -28,8 +22,10 @@ public class Pacman {
     public static void main(String[] args) {
                 
         View view = new View();
-        Model model = new Model();
-        Controller controller = new Controller(model, view, "map.png");
+        Model model = new Model("map.png");
+        
+        Controller controller = new Controller(model, view);
+        
         view.setController(controller);
         model.setController(controller);
         

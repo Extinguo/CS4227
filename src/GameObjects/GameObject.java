@@ -18,16 +18,34 @@ public class GameObject {
     Rectangle me;
     Color color;
     
+    /**
+     * Walls and Beans are GameObjects. They only differ by the color and the size.
+     * These are set here.
+     * 
+     * @param x The x position where the Object will be
+     * @param y The y position where the Object will be
+     * @param width The width of the Object
+     * @param height THe Height of the Object
+     * @param color The Color of the Object
+     */
     GameObject(int x, int y, int width, int height, Color color) {
         me = new Rectangle(x, y, width, height);
         this.color = color;
     }
     
+    /**
+     * Renders the Object.
+     * @param g The Graphics Object on which to render.
+     */
     public void render(Graphics g) {
         g.setColor(color);
         g.fillRect(me.x, me.y, me.width, me.height);
     }
     
+    /**
+     * Returns the bounds.
+     * @return Rectangle which has the bounds and the x/y position
+     */
     public Rectangle getBounds() {
         return me;
     }

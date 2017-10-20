@@ -7,29 +7,23 @@ package GameObjects;
 
 import CollisionDetection.BeanCollisionDetection;
 import CollisionDetection.WallCollisionDetection;
-import GUI.Controller;
 import GameObjects.Player.Attributes.Speed;
 import GameObjects.Player.Player;
 import GameObjects.Player.PlayerFactory;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 
 /**
  *
  * @author Magd
  */
 public class Level {
-
-    Controller controller;
     
     private final int BLOCKSIZE = 32;
     private final int tileColorInPNG   = 0xFF000000;
@@ -42,24 +36,28 @@ public class Level {
     private GameObject[][] walls;
     private List<GameObject> beans;
     
-    public List<Enemy> enemys;
+    private Player player;
+    private List<Enemy> enemys;
 
-    public Level(Controller controller) {
-        this.controller = controller;
+    public Level() {
     }
 
+    /**
+     * Loads the leveldata from the given file and stores it. 
+     * The Player is created by this aswell since his position is only clear after loading the leveldata!
+     * 
+     * @param filename The file in the Ressources folder, which describes the level structure.
+     * It is important that the Colors in the file are the ones specified above.
+     */
     public void loadLevel(String filename) {
         beans = new ArrayList<>();
         enemys = new ArrayList<>();
         try {
             
-            
             URL location = Level.class.getProtectionDomain().getCodeSource().getLocation();
-            System.out.println(location.toString());
             String path = location.getPath().replace("build/classes/", "Ressources/" + filename);
-            System.out.print(path);
-            BufferedImage map=ImageIO.read(new FileInputStream("E:/map.png"));
-            //BufferedImage map = ImageIO.read(new URL(location, path));
+//            BufferedImage map=ImageIO.read(new FileInputStream("E:/map.png"));
+            BufferedImage map = ImageIO.read(new URL(location, path));
             this.width = map.getWidth();
             this.height = map.getHeight();
             System.out.print(map.getHeight()+"  "+map.getHeight());
@@ -75,8 +73,9 @@ public class Level {
                             break;
                         case playerCclorInPNG:
                             Player playerWithSpeed = PlayerFactory.createPlayerWithSpeed(xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-6, BLOCKSIZE-6);
-                            ((Speed)(playerWithSpeed)).setWallCollisionAndBeanCollision(new WallCollisionDetection(this),new BeanCollisionDetection(this));
-                            controller.setPlayer(playerWithSpeed);
+                            ((Speed)(playerWithSpeed)).setWallCollision(new WallCollisionDetection(this));
+                            ((Speed)(playerWithSpeed)).setBeanCollision(new BeanCollisionDetection(this));
+                            player = playerWithSpeed;
                             break;
                         case enemyColorInPNG:
                             enemys.add(new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE));
@@ -93,6 +92,11 @@ public class Level {
         }
     }
 
+    /**
+     * Renders the Level. This includes beans, walls and enemys.
+     * 
+     * @param g The Graphic on which to render
+     */
     public void render(Graphics g) {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -111,6 +115,9 @@ public class Level {
         }
     }
     
+    /**
+     * This tick-method helps to update the gamedata.
+     */
     public void tick() {
         for(Enemy e : enemys) {
             e.tick();
@@ -123,6 +130,10 @@ public class Level {
     
     public List<GameObject> getBeans() {
         return beans;
+    }
+    
+    public Player getPlayer() {
+        return player;
     }
 
 }

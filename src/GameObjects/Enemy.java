@@ -27,6 +27,7 @@ public class Enemy {
     }
     
     public void tick() {
+        
     }
     
 }
