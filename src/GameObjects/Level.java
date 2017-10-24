@@ -7,11 +7,13 @@ package GameObjects;
 
 import CollisionDetection.BeanCollisionDetection;
 import CollisionDetection.WallCollisionDetection;
+import GUI.Controller;
 import GameObjects.Player.Attributes.Speed;
 import GameObjects.Player.Player;
 import GameObjects.Player.PlayerFactory;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,10 +38,11 @@ public class Level {
     private GameObject[][] walls;
     private List<GameObject> beans;
     
-    private Player player;
+   // private List<Player> players;
     private List<Enemy> enemys;
-
-    public Level() {
+    private Controller controller;
+    public Level(Controller controller) {
+        this.controller=controller;
     }
 
     /**
@@ -57,13 +60,14 @@ public class Level {
             URL location = Level.class.getProtectionDomain().getCodeSource().getLocation();
             String path = location.getPath().replace("build/classes/", "Ressources/" + filename);
 //            BufferedImage map=ImageIO.read(new FileInputStream("E:/map.png"));
-            BufferedImage map = ImageIO.read(new URL(location, path));
+            BufferedImage map = ImageIO.read(new FileInputStream("E:/map.png"));
             this.width = map.getWidth();
             this.height = map.getHeight();
             System.out.print(map.getHeight()+"  "+map.getHeight());
             int[] pixels = new int[width * height];
             walls = new GameObject[width][height];
             map.getRGB(0, 0, width, height, pixels, 0, width);
+            int count=1;
             for (int xx = 0; xx < width; xx++) {
                 for (int yy = 0; yy < height; yy++) {
                     int val = pixels[xx + (yy * width)];
@@ -72,10 +76,19 @@ public class Level {
                             walls[xx][yy] = GameObjectFactory.createWall(xx * BLOCKSIZE, yy * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE);
                             break;
                         case playerCclorInPNG:
-                            Player playerWithSpeed = PlayerFactory.createPlayerWithSpeed(xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-6, BLOCKSIZE-6);
+
+
+                            Player playerWithSpeed = PlayerFactory.createNewPlayerWithSpeed("bob", 4, 4, xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-6, BLOCKSIZE-6);
+
+                            // -------------------------------
+
+                            //Player playerWithSpeed = PlayerFactory.createPlayerWithSpeed(xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-6, BLOCKSIZE-6);
                             ((Speed)(playerWithSpeed)).setWallCollision(new WallCollisionDetection(this));
                             ((Speed)(playerWithSpeed)).setBeanCollision(new BeanCollisionDetection(this));
-                            player = playerWithSpeed;
+                            playerWithSpeed.setNum(count++);
+                            controller.addPlayer(playerWithSpeed);
+                           // players.add(playerWithSpeed);
+                            // player = playerWithSpeed;
                             break;
                         case enemyColorInPNG:
                             enemys.add(new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE));
@@ -86,7 +99,7 @@ public class Level {
                     }
                 }
             }
-            System.out.print("The number of Players:"+controller.getPlayers().size());
+            System.out.print("The number of Players:");
         } catch (IOException ex) {
             Logger.getLogger(Level.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -132,8 +145,10 @@ public class Level {
         return beans;
     }
     
-    public Player getPlayer() {
-        return player;
+    /*
+    public List<Player> getPlayer() {
+        return players;
     }
+    */
 
 }

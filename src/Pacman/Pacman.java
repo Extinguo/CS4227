@@ -22,9 +22,9 @@ public class Pacman {
     public static void main(String[] args) {
                 
         View view = new View();
-        Model model = new Model("map.png");
+        Model model = new Model();
         
-        Controller controller = new Controller(model, view);
+        Controller controller = new Controller(model, view,"map.png");
         
         view.setController(controller);
         model.setController(controller);

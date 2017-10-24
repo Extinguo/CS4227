@@ -55,9 +55,17 @@ public abstract class PlayerDecorator implements Player {
     
     @Override
     public void tick() { tempPlayer.tick(); }
-    
-    
-    
+
+    @Override
+    public int getNum()
+    {
+        return tempPlayer.getNum();
+    }
+    @Override
+    public void setNum(int m)
+    {
+        tempPlayer.setNum(m);
+    }
     
     
     

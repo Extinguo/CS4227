@@ -17,14 +17,15 @@ import java.util.List;
  * @author Magd
  */
 public class PlainPlayer implements Player {
-    
+
     private String name = "RandomName";
     private int lifes = 3;
     private int score = 0;
     private int eatBeans=0;
     private List<PlayerDecorator> decorators;
     private Rectangle me;  
-    
+
+    private int num;
 
     public PlainPlayer(int x, int y, int width, int height) {
         me = new Rectangle(x, y, width, height);
@@ -76,6 +77,16 @@ public class PlainPlayer implements Player {
     @Override
     public void setEatbeans(int eatbeans) {
         this.eatBeans=eatbeans;
+    }
+
+    @Override
+    public int getNum() {
+        return this.num;
+    }
+
+    @Override
+    public void setNum(int m) {
+        this.num=m;
     }
 
     @Override

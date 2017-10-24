@@ -11,7 +11,6 @@ import MoveStrategy.PlayerMovementsListener;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -77,8 +76,8 @@ public class Controller implements Runnable {
         }
     }
 
-    public void setPlayer(Player player) {
-        model.setPlayers(player);
+    public void addPlayer(Player player) {
+        model.addPlayer(player);
     }
 
     
@@ -156,7 +155,11 @@ public class Controller implements Runnable {
             // us our final value to wait for
             // remember this is in ms, whereas our lastLoopTime etc. vars are in ns.
             try {
-                Thread.sleep((lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000);
+                long timeout = (lastLoopTime - System.nanoTime() + OPTIMAL_TIME) / 1000000;
+                if(timeout > 0) {
+                    Thread.sleep(timeout);
+                }
+
             } catch (InterruptedException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }

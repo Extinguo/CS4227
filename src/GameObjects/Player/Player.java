@@ -36,4 +36,7 @@ public interface Player {
 
     public int getEatbeans();
     public void setEatbeans(int eatbeans);
+
+    public int getNum();
+    public void setNum(int m);
 }

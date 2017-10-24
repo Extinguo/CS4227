@@ -31,7 +31,7 @@ public class Model {
         this.controller = controller;
     }
     
-    public void setPlayers(Player player) {
+    public void addPlayer(Player player) {
         this.players.add(player);
     }
     public void setLevel(Level level) {
