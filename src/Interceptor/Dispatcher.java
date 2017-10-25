@@ -46,7 +46,6 @@ public class Dispatcher{
         {
             ConcreteInterceptor i = (ConcreteInterceptor)interceptors.get(index);
             i.onEatBeans(context);
-            System.out.println("Log");
         }
     }
 }
