@@ -1,15 +1,15 @@
 package Interceptor;
 
 /**
- * Created by viola on 2017/10/23.
+ * Created by viola on 2017/10/20.
  */
 public class PlayerInfoContext implements I_Context {
-    private String playerID, descriptionForLog;
+    private String playerName, descriptionForLog;
     private int beans;
 
-    public PlayerInfoContext(String playerID, int beans )
+    public PlayerInfoContext(String playerName, int beans)
     {
-        this.playerID = playerID;
+        this.playerName = playerName;
         this.beans = beans;
         makeDescriptionForLog();
     }
@@ -21,6 +21,6 @@ public class PlayerInfoContext implements I_Context {
 
     private void makeDescriptionForLog()
     {
-        descriptionForLog = "Player "+ playerID +" have ate "+ beans + " bean(s)";
+        descriptionForLog = "Player "+ playerName +" have ate "+ beans + " bean(s)";
     }
 }

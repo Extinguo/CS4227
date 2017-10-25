@@ -11,6 +11,8 @@ import GameObjects.Helper;
 import GameObjects.Helper.Direction;
 import GameObjects.Player.Player;
 import GameObjects.Player.PlayerDecorator;
+
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -41,7 +43,7 @@ public class Speed extends PlayerDecorator {
     }
     
     @Override
-    public void tick() {
+    public void tick() throws IOException {
         if (up) {
             if(!wallCollision.collisionHappening(Direction.up))
                 super.setY(super.getY()-speed); 

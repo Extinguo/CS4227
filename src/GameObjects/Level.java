@@ -60,7 +60,7 @@ public class Level {
             URL location = Level.class.getProtectionDomain().getCodeSource().getLocation();
             String path = location.getPath().replace("build/classes/", "Ressources/" + filename);
 //            BufferedImage map=ImageIO.read(new FileInputStream("E:/map.png"));
-            BufferedImage map = ImageIO.read(new FileInputStream("E:/map.png"));
+            BufferedImage map = ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
             this.width = map.getWidth();
             this.height = map.getHeight();
             System.out.print(map.getHeight()+"  "+map.getHeight());

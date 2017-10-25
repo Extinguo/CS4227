@@ -10,26 +10,43 @@ import java.util.Vector;
  */
 public class Dispatcher{
 
-    private List<Interceptor> interceptors;
+    private ArrayList<Interceptor> interceptorList;
+    private static Dispatcher FirstInstance = null;
 
     private Dispatcher()
     {
-        interceptors = new ArrayList<>();
+        interceptorList = new ArrayList<>();
+    }
+
+    public static Dispatcher getInstance()
+    {
+        if(FirstInstance == null)
+        {
+            FirstInstance = new Dispatcher();
+        }
+        return FirstInstance;
     }
 
     public void register(Interceptor interceptor){
-        interceptors.add(interceptor);
+        interceptorList.add(interceptor);
     }
 
     public void remove(Interceptor interceptor){
-        interceptors.remove(interceptor);
+        interceptorList.remove(interceptor);
     }
 
     public void dispatchClientRequestInterceptorEatBeansLogging(PlayerInfoContext context) throws IOException {
+        ArrayList<Interceptor> interceptors;
+        synchronized (this)
+        {
+            interceptors = interceptorList;
+        }
+
         for(int index = 0; index < interceptors.size(); index++)
         {
             ConcreteInterceptor i = (ConcreteInterceptor)interceptors.get(index);
             i.onEatBeans(context);
+            System.out.println("Log");
         }
     }
 }

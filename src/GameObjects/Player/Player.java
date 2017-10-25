@@ -8,6 +8,7 @@ package GameObjects.Player;
 import GameObjects.Helper;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public interface Player {
     
     public String getName();
     public void setName(String name);
-    public int    getLifes();
+    public int  getLifes();
     public int getX();
     public int getY();
     public List<PlayerDecorator> getDecorators();
@@ -31,7 +32,7 @@ public interface Player {
     public void setDirectionStatus(Helper.Direction direction, boolean b);
     public void setScore(int score);
     
-    public void tick();
+    public void tick() throws IOException;
     public void render(Graphics g);
 
     public int getEatbeans();

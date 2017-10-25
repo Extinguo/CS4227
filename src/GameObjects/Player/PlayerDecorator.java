@@ -8,6 +8,7 @@ package GameObjects.Player;
 import GameObjects.Helper;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -54,7 +55,7 @@ public abstract class PlayerDecorator implements Player {
     public void render(Graphics g) { tempPlayer.render(g); }
     
     @Override
-    public void tick() { tempPlayer.tick(); }
+    public void tick() throws IOException { tempPlayer.tick(); }
 
     @Override
     public int getNum()

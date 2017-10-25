@@ -8,6 +8,7 @@ package GUI;
 import GameObjects.Player.Player;
 import MoveStrategy.PlayerMovementsListener;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,7 +52,11 @@ public class Controller implements Runnable {
     @Override
     public void run() {
         view.requestFocus();
-        gameloopv2();
+        try {
+            gameloopv2();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public synchronized void start() {
@@ -82,7 +87,7 @@ public class Controller implements Runnable {
 
     
     // Unknown
-    private void gameloopv1() {
+    private void gameloopv1() throws IOException {
         int fps = 0;
         double timer = System.currentTimeMillis();
         long lastTime = System.nanoTime();
@@ -111,7 +116,7 @@ public class Controller implements Runnable {
     }
     
     // Kevin Glass - http://www.java-gaming.org/index.php?topic=24220.0
-    private void gameloopv2() {
+    private void gameloopv2() throws IOException {
         
         long lastLoopTime = System.nanoTime();
         final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
