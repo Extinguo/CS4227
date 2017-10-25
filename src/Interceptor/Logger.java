@@ -12,7 +12,6 @@ public class Logger {
     public void logEatBeans(I_Context context) throws IOException {
 
         BufferedWriter bw = new BufferedWriter(new FileWriter("EatBeans.log", true));
-        System.out.println("Log");
         bw.write(context.getDescription());
         bw.newLine();
         bw.close();
