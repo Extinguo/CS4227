@@ -5,8 +5,6 @@
  */
 package GameObjects;
 
-import GameObjects.Player.EnemyIntelligentMovement;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;

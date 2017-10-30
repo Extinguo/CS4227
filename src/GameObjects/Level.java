@@ -9,7 +9,6 @@ import CollisionDetection.BeanCollisionDetection;
 import CollisionDetection.WallCollisionDetection;
 import GUI.Controller;
 import GameObjects.Player.Attributes.Speed;
-import GameObjects.Player.EnemyIntelligentMovement;
 import GameObjects.Player.Player;
 import GameObjects.Player.PlayerFactory;
 import java.awt.Graphics;
