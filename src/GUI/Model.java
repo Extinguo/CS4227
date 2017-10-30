@@ -6,7 +6,7 @@
 package GUI;
 
 import GameObjects.Level;
-import GameObjects.Player.Player;
+import Player.Player;
 
 import java.util.ArrayList;
 import java.util.List;

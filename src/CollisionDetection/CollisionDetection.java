@@ -7,11 +7,17 @@ package CollisionDetection;
 
 import GameObjects.Helper.Direction;
 import GameObjects.Level;
-import GameObjects.Player.Player;
+import Player.Player;
 
 /**
  *
  * @author Magd
+ *
+ *  Visitor
+ *        Plugable Adapter
+ *  Lambda Expression
+ *  Concurrency
+ *  Anime
  */
 public abstract class CollisionDetection {
     

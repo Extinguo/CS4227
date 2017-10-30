@@ -8,9 +8,11 @@ package GameObjects;
 import CollisionDetection.BeanCollisionDetection;
 import CollisionDetection.WallCollisionDetection;
 import GUI.Controller;
-import GameObjects.Player.Attributes.Speed;
-import GameObjects.Player.Player;
-import GameObjects.Player.PlayerFactory;
+import Monster.Enemy;
+import Monster.EnemyIntelligentMovement;
+import Player.Attributes.Speed;
+import Player.Player;
+import Player.PlayerFactory;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
@@ -59,7 +61,7 @@ public class Level {
             
             URL location = Level.class.getProtectionDomain().getCodeSource().getLocation();
             String path = location.getPath().replace("build/classes/", "Ressources/" + filename);
-            BufferedImage map=ImageIO.read(new FileInputStream("E:/map.png"));
+            BufferedImage map=ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
           //  BufferedImage map = ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
             this.width = map.getWidth();
             this.height = map.getHeight();

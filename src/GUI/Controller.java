@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import GameObjects.Player.Player;
+import Player.Player;
 import MoveStrategy.PlayerMovementsListener;
 
 import java.io.IOException;
