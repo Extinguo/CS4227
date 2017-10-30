@@ -12,13 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import GameObjects.Helper;
+import Visitor.IVisitable;
 import Visitor.IVisitor;
 
 /**
  *
  * @author Magd
  */
-public class PlainPlayer implements Player {
+public class PlainPlayer implements Player, IVisitable {
 
     private String name = "RandomName";
     private int lifes = 3;

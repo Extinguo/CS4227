@@ -12,13 +12,14 @@ import java.io.IOException;
 import java.util.List;
 
 import GameObjects.Helper;
+import Visitor.IVisitable;
 import Visitor.IVisitor;
 
 /**
  *
  * @author Magd
  */
-public abstract class PlayerDecorator implements Player {
+public abstract class PlayerDecorator implements Player, IVisitable{
     
     protected Player tempPlayer;
 
