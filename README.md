@@ -3,12 +3,12 @@ Implemented Pattern:
   - Command
   - Factory Method
   - Bridge 
+  - Interceptor
   
   (- Decorator [Player])
 -----------------------------------------------------------------------
 
-Use Interceptor for whenever a collision happens to log it. -> Qing
-Build in Visitor -> Yann
+Build in Visitor -> Yann    
 Multiplayer -> Bob
 
 If time: Memento -> Magd
