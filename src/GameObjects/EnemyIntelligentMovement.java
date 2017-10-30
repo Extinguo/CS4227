@@ -19,7 +19,7 @@ public class EnemyIntelligentMovement {
     public Random randomGen;
     private int time=0;
     private int targetTime=60*30;
-    private int speed=6;
+    private int speed=1;
     private Player player;
     private int player_num;
     int n=1;
@@ -71,6 +71,7 @@ public class EnemyIntelligentMovement {
                     dir=randomGen.nextInt(4);
                 }
             }
+
             else if(dir==up)
             {
                 if(canMove(enemy.getMe().x,enemy.getMe().y-speed))
@@ -134,7 +135,6 @@ public class EnemyIntelligentMovement {
                 }
             }
             boolean move=false;
-
         }
     }
 }
