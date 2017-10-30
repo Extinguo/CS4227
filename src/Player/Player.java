@@ -5,11 +5,14 @@
  */
 package Player;
 
-import GameObjects.Helper;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.List;
+
+import GameObjects.Helper;
+import Visitor.IVisitor;
 
 /**
  *
@@ -40,4 +43,8 @@ public interface Player {
 
     public int getNum();
     public void setNum(int m);
+    
+    public void setColor(Color c);
+    
+   	public void accept(IVisitor visitor);
 }

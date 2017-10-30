@@ -5,12 +5,14 @@
  */
 package Player;
 
-import GameObjects.Helper;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
+
+import GameObjects.Helper;
+import Visitor.IVisitor;
 
 /**
  *
@@ -24,6 +26,7 @@ public class PlainPlayer implements Player {
     private int eatBeans=0;
     private List<PlayerDecorator> decorators;
     private Rectangle me;  
+    private Color color = Color.yellow;
 
     private int num;
 
@@ -65,7 +68,7 @@ public class PlainPlayer implements Player {
     
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.yellow);
+        g.setColor(color);
         g.fillRect(me.x, me.y, me.width, me.height);
     }
 
@@ -101,10 +104,15 @@ public class PlainPlayer implements Player {
     @Override
     public void setDirectionStatus(Helper.Direction direction, boolean b) { }
     
-    
-    
-    
-    
-    
+    @Override
+	public void accept(IVisitor visitor) {
+		visitor.visit(this);    
+	}
+
+	@Override
+	public void setColor(Color c) {
+		this.color = c;
+	}
+
     
 }

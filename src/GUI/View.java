@@ -5,8 +5,6 @@
  */
 package GUI;
 
-import Player.Player;
-
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,16 +12,21 @@ import java.awt.Graphics;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
+import Player.Player;
+import Visitor.IVisitable;
+import Visitor.IVisitor;
+
 /**
  *
  * @author Magd
  */
-public class View extends Canvas {
+public class View extends Canvas implements IVisitable {
     
     Controller controller;
 
     private final int WIDTH = 640;
     private final int HEIGHT = 480;
+    private Color backGroundColor = Color.black;
 
     /**
      * Initialises the view by settings its dimension.
@@ -45,7 +48,7 @@ public class View extends Canvas {
             return;
         }
         Graphics g = bs.getDrawGraphics();
-        g.setColor(Color.black);
+        g.setColor(backGroundColor);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         for(Player mplayer:controller.getPlayers())
             mplayer.render(g);
@@ -63,5 +66,14 @@ public class View extends Canvas {
     public void setController(Controller controller) {
         this.controller = controller;
     }
+
+	@Override
+	public void accept(IVisitor visitor) {
+		visitor.visit(this);
+	}
+	
+	public void setBackgroundColor(Color c) {
+		this.backGroundColor = c;
+	}
 
 }

@@ -9,11 +9,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import Visitor.IVisitable;
+import Visitor.IVisitor;
+
 /**
  *
  * @author Magd
  */
-public class GameObject {
+public class GameObject implements IVisitable {
     
     Rectangle me;
     Color color;
@@ -50,4 +53,13 @@ public class GameObject {
         return me;
     }
     
+    @Override
+	public void accept(IVisitor visitor) {
+		visitor.visit(this);
+	}
+	
+	 public void setColor(Color c) {
+ 		this.color = c;
+	 }
+
 }

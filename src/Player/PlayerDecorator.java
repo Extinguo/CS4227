@@ -5,11 +5,14 @@
  */
 package Player;
 
-import GameObjects.Helper;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.List;
+
+import GameObjects.Helper;
+import Visitor.IVisitor;
 
 /**
  *
@@ -68,6 +71,15 @@ public abstract class PlayerDecorator implements Player {
         tempPlayer.setNum(m);
     }
     
+    @Override
+	public void setColor(Color c) {
+		 tempPlayer.setColor(c);
+	}
+
+	@Override
+	public void accept(IVisitor visitor) {
+		tempPlayer.accept(visitor);
+	}
     
     
     

@@ -5,14 +5,6 @@
  */
 package GameObjects;
 
-import CollisionDetection.BeanCollisionDetection;
-import CollisionDetection.WallCollisionDetection;
-import GUI.Controller;
-import Monster.Enemy;
-import Monster.EnemyIntelligentMovement;
-import Player.Attributes.Speed;
-import Player.Player;
-import Player.PlayerFactory;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
@@ -21,7 +13,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
+
+import CollisionDetection.BeanCollisionDetection;
+import CollisionDetection.WallCollisionDetection;
+import GUI.Controller;
+import Monster.Enemy;
+import Monster.EnemyIntelligentMovement;
+import Player.Player;
+import Player.PlayerFactory;
+import Player.Attributes.Speed;
+import Visitor.IVisitor;
 
 /**
  *
@@ -59,9 +62,11 @@ public class Level {
         enemys = new ArrayList<>();
         try {
             
+        		IVisitor themeVisitor = this.controller.getThemeVisitor();
             URL location = Level.class.getProtectionDomain().getCodeSource().getLocation();
             String path = location.getPath().replace("build/classes/", "Ressources/" + filename);
-            BufferedImage map=ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
+            BufferedImage map=ImageIO.read(new FileInputStream("Ressources/map.png"));
+           // BufferedImage map=ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
           //  BufferedImage map = ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
             this.width = map.getWidth();
             this.height = map.getHeight();
@@ -76,12 +81,14 @@ public class Level {
                     switch (val) {
                         case tileColorInPNG:
                             walls[xx][yy] = GameObjectFactory.createWall(xx * BLOCKSIZE, yy * BLOCKSIZE, BLOCKSIZE, BLOCKSIZE);
+                            walls[xx][yy].accept(themeVisitor);
                             break;
                         case playerCclorInPNG:
 
 
                             Player playerWithSpeed = PlayerFactory.createNewPlayerWithSpeed("bob", 4, 4, xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-8, BLOCKSIZE-8);
-
+                            playerWithSpeed.accept(themeVisitor);
+                            	
                             // -------------------------------
 
                             //Player playerWithSpeed = PlayerFactory.createPlayerWithSpeed(xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-6, BLOCKSIZE-6);
@@ -97,9 +104,13 @@ public class Level {
                             EnemyIntelligentMovement enemyIntelligentMovement=new EnemyIntelligentMovement(this,enemy);
                             enemy.setEnemyIntelligentMovement(enemyIntelligentMovement);
                             enemys.add(enemy);
+                            enemy.accept(themeVisitor);
+                            
                             break;
                         default:
-                            beans.add(GameObjectFactory.createBean(xx * BLOCKSIZE, yy * BLOCKSIZE));
+                        		GameObject newBeans = GameObjectFactory.createBean(xx * BLOCKSIZE, yy * BLOCKSIZE);
+                            beans.add(newBeans);
+                            newBeans.accept(themeVisitor);
                             break;
                     }
                 }
