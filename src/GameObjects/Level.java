@@ -9,6 +9,7 @@ import CollisionDetection.BeanCollisionDetection;
 import CollisionDetection.WallCollisionDetection;
 import GUI.Controller;
 import GameObjects.Player.Attributes.Speed;
+import GameObjects.Player.EnemyIntelligentMovement;
 import GameObjects.Player.Player;
 import GameObjects.Player.PlayerFactory;
 import java.awt.Graphics;
@@ -59,8 +60,8 @@ public class Level {
             
             URL location = Level.class.getProtectionDomain().getCodeSource().getLocation();
             String path = location.getPath().replace("build/classes/", "Ressources/" + filename);
-//            BufferedImage map=ImageIO.read(new FileInputStream("E:/map.png"));
-            BufferedImage map = ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
+            BufferedImage map=ImageIO.read(new FileInputStream("E:/map.png"));
+          //  BufferedImage map = ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
             this.width = map.getWidth();
             this.height = map.getHeight();
             System.out.print(map.getHeight()+"  "+map.getHeight());
@@ -78,7 +79,7 @@ public class Level {
                         case playerCclorInPNG:
 
 
-                            Player playerWithSpeed = PlayerFactory.createNewPlayerWithSpeed("bob", 4, 4, xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-6, BLOCKSIZE-6);
+                            Player playerWithSpeed = PlayerFactory.createNewPlayerWithSpeed("bob", 4, 4, xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-8, BLOCKSIZE-8);
 
                             // -------------------------------
 
@@ -91,7 +92,10 @@ public class Level {
                             // player = playerWithSpeed;
                             break;
                         case enemyColorInPNG:
-                            enemys.add(new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE));
+                            Enemy enemy=new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE);
+                            EnemyIntelligentMovement enemyIntelligentMovement=new EnemyIntelligentMovement(this,enemy);
+                            enemy.setEnemyIntelligentMovement(enemyIntelligentMovement);
+                            enemys.add(enemy);
                             break;
                         default:
                             beans.add(GameObjectFactory.createBean(xx * BLOCKSIZE, yy * BLOCKSIZE));
@@ -144,7 +148,10 @@ public class Level {
     public List<GameObject> getBeans() {
         return beans;
     }
-    
+
+    public List<Enemy> getEnemys(){return enemys;}
+
+    public Controller getController(){return this.controller;}
     /*
     public List<Player> getPlayer() {
         return players;
