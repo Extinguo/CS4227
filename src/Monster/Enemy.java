@@ -11,17 +11,17 @@ import java.awt.Rectangle;
 
 import Visitor.IVisitable;
 import Visitor.IVisitor;
+import java.io.Serializable;
 
 /**
  *
  * @author Magd
  */
-public class Enemy implements IVisitable  {
+public class Enemy implements IVisitable, Serializable  {
     private EnemyIntelligentMovement enemyIntelligentMovement;
     Color color = Color.red;
 
-    public void setEnemyIntelligentMovement(EnemyIntelligentMovement enemyIntelligentMovement)
-    {
+    public void setEnemyIntelligentMovement(EnemyIntelligentMovement enemyIntelligentMovement) {
         this.enemyIntelligentMovement=enemyIntelligentMovement;
     }
     Rectangle me;

@@ -4,9 +4,11 @@ import GameObjects.Level;
 import Player.Player;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.Random;
 
-public class EnemyIntelligentMovement {
+public class EnemyIntelligentMovement implements Serializable {
+    
     private Level level;
     private Enemy enemy;
     private int random=0,smart=1;
@@ -16,10 +18,11 @@ public class EnemyIntelligentMovement {
     public Random randomGen;
     private int time=0;
     private int targetTime=60*30;
-    private int speed=6;
+    private int speed=3;
     private Player player;
     private int player_num;
     int n=1;
+    
     public EnemyIntelligentMovement(Level level,Enemy enemy)
     {
         this.level=level;

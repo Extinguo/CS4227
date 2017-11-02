@@ -7,6 +7,7 @@ package GUI;
 
 import GameObjects.Level;
 import Player.Player;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +16,20 @@ import java.util.List;
  *
  * @author Magd
  */
-public class Model {
+public class Model implements Serializable {
     
-    Controller controller;
-    List<Player> players;
-//    Player List<player>;
-    //I just added a new player.
-    Level level;
+    private Controller controller;
+    private List<Player> players;
+    private Level level;
 
     public Model() {
         players=new ArrayList<>();
+    }
+    
+    public Model(Model model) {
+        this.controller = model.controller;
+        this.players = model.players;
+        this.level = new Level(model.level);
     }
     
     public void setController(Controller controller) {
@@ -34,6 +39,11 @@ public class Model {
     public void addPlayer(Player player) {
         this.players.add(player);
     }
+    
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+    
     public void setLevel(Level level) {
         this.level = level;
     }
@@ -44,6 +54,7 @@ public class Model {
     public Level getLevel() {
         return level;
     }
-
+    
+    
     
 }

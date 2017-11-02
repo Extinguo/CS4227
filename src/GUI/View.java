@@ -52,7 +52,6 @@ public class View extends Canvas implements IVisitable {
         g.fillRect(0, 0, WIDTH, HEIGHT);
         for(Player mplayer:controller.getPlayers())
             mplayer.render(g);
-//        controller.getPlayer().render(g);
         controller.getLevel().render(g);
 
         g.dispose();
@@ -67,13 +66,13 @@ public class View extends Canvas implements IVisitable {
         this.controller = controller;
     }
 
-	@Override
-	public void accept(IVisitor visitor) {
-		visitor.visit(this);
-	}
-	
-	public void setBackgroundColor(Color c) {
-		this.backGroundColor = c;
-	}
+    @Override
+    public void accept(IVisitor visitor) {
+        visitor.visit(this);
+    }
+
+    public void setBackgroundColor(Color c) {
+        this.backGroundColor = c;
+    }
 
 }

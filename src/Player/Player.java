@@ -13,12 +13,13 @@ import java.util.List;
 
 import GameObjects.Helper;
 import Visitor.IVisitor;
+import java.io.Serializable;
 
 /**
  *
  * @author Magd
  */
-public interface Player {
+public interface Player extends Serializable {
     
     public String getName();
     public void setName(String name);
@@ -46,5 +47,5 @@ public interface Player {
     
     public void setColor(Color c);
     
-   	public void accept(IVisitor visitor);
+    public void accept(IVisitor visitor);
 }
