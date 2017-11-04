@@ -13,6 +13,7 @@ import java.awt.Rectangle;
  *
  * @author Magd
  */
+
 public class WallCollisionDetection extends CollisionDetection {
 
     

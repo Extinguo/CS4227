@@ -13,13 +13,13 @@ import Visitor.IVisitable;
 import Visitor.IVisitor;
 
 /**
+ * sonarcube
  *
  * @author Magd
  */
 public class Enemy implements IVisitable  {
     private EnemyIntelligentMovement enemyIntelligentMovement;
     Color color = Color.red;
-
     public void setEnemyIntelligentMovement(EnemyIntelligentMovement enemyIntelligentMovement)
     {
         this.enemyIntelligentMovement=enemyIntelligentMovement;
