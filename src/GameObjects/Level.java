@@ -9,7 +9,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -26,11 +25,13 @@ import Player.PlayerFactory;
 import Player.Attributes.Speed;
 import Visitor.IVisitor;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Magd
  */
-public class Level {
+public class Level implements Serializable {
     
     private final int BLOCKSIZE = 32;
     private final int tileColorInPNG   = 0xFF000000;
@@ -46,8 +47,21 @@ public class Level {
    // private List<Player> players;
     private List<Enemy> enemys;
     private Controller controller;
+    
+    
     public Level(Controller controller) {
         this.controller=controller;
+    }
+    
+    public Level(Level level) {
+        this.width = level.width;
+        this.height = level.height;
+        
+        this.walls = level.walls;
+        this.beans = new ArrayList<>(level.beans);
+        
+        this.enemys = level.enemys;
+        this.controller = level.controller;
     }
 
     /**
@@ -61,11 +75,8 @@ public class Level {
         beans = new ArrayList<>();
         enemys = new ArrayList<>();
         try {
-            
-        		IVisitor themeVisitor = this.controller.getThemeVisitor();
-            URL location = Level.class.getProtectionDomain().getCodeSource().getLocation();
-            String path = location.getPath().replace("build/classes/", "Ressources/" + filename);
-            BufferedImage map=ImageIO.read(new FileInputStream("Ressources/map.png"));
+            IVisitor themeVisitor = this.controller.getThemeVisitor();
+            BufferedImage map=ImageIO.read(new FileInputStream("Ressources/" + filename));
            // BufferedImage map=ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
           //  BufferedImage map = ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
             this.width = map.getWidth();
@@ -84,20 +95,14 @@ public class Level {
                             walls[xx][yy].accept(themeVisitor);
                             break;
                         case playerCclorInPNG:
-
-
+                            
                             Player playerWithSpeed = PlayerFactory.createNewPlayerWithSpeed("bob", 4, 4, xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-8, BLOCKSIZE-8);
                             playerWithSpeed.accept(themeVisitor);
-                            	
-                            // -------------------------------
-
-                            //Player playerWithSpeed = PlayerFactory.createPlayerWithSpeed(xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-6, BLOCKSIZE-6);
+                            
                             ((Speed)(playerWithSpeed)).setWallCollision(new WallCollisionDetection(this));
                             ((Speed)(playerWithSpeed)).setBeanCollision(new BeanCollisionDetection(this));
                             playerWithSpeed.setNum(count++);
                             controller.addPlayer(playerWithSpeed);
-                           // players.add(playerWithSpeed);
-                            // player = playerWithSpeed;
                             break;
                         case enemyColorInPNG:
                             Enemy enemy=new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE);
@@ -115,7 +120,7 @@ public class Level {
                     }
                 }
             }
-            System.out.print("The number of Players:");
+            System.out.print("The number of Players: ");
         } catch (IOException ex) {
             Logger.getLogger(Level.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -164,10 +169,4 @@ public class Level {
     public List<Enemy> getEnemys(){return enemys;}
 
     public Controller getController(){return this.controller;}
-    /*
-    public List<Player> getPlayer() {
-        return players;
-    }
-    */
-
 }

@@ -30,7 +30,8 @@ public class Pacman {
         ConcreteInterceptor interceptor = new ConcreteInterceptor();
         dispatcher.register(interceptor);
         
-        Controller controller = new Controller(model, view,"map.png");
+//        Controller controller = new Controller(model, view, "map.png");
+        Controller controller = new Controller("Test1_Memento", view);
         
         view.setController(controller);
         model.setController(controller);

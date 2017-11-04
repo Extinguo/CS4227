@@ -8,6 +8,7 @@ package CollisionDetection;
 import GameObjects.Helper.Direction;
 import GameObjects.Level;
 import Player.Player;
+import java.io.Serializable;
 
 /**
  *
@@ -17,9 +18,9 @@ import Player.Player;
  *        Plugable Adapter
  *  Lambda Expression
  *  Concurrency
- *  Anime
+ *  Animation
  */
-public abstract class CollisionDetection {
+public abstract class CollisionDetection implements Serializable {
     
     protected Player player;
     protected Level level;

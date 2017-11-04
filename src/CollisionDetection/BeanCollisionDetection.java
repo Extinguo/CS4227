@@ -34,7 +34,7 @@ public class BeanCollisionDetection extends CollisionDetection {
                 level.getBeans().remove(i);
                 player.setEatbeans(player.getEatbeans()+1);
                 String s="The player "+player.getName()+": has eaten "+player.getEatbeans()+"beans";
-                System.out.println(s);
+//                System.out.println(s);
                 logPlayerEatBeans(player.getName(),player.getEatbeans());
                 break;
             }

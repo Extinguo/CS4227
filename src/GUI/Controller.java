@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import Memento.Caretaker;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
@@ -14,24 +15,30 @@ import MoveStrategy.PlayerMovementsListener;
 import Player.Player;
 import Visitor.IVisitor;
 import Visitor.Theme1;
+import java.io.Serializable;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Magd
  */
-public class Controller implements Runnable {
+public class Controller implements Runnable, Serializable {
 
     private Model model;
-    private View view;
+    private transient View view;
 
-    private final int TARGET_FPS = 60;
-    private boolean isRunning = false;
-    private Thread thread;
-    private IVisitor themeVisitor = new Theme1();
+    private transient final int TARGET_FPS = 60;
+    private transient boolean isRunning = false;
+    private transient Thread thread;
+    private transient IVisitor themeVisitor = new Theme1();
+    
+    private transient Caretaker caretaker;
 
     public Controller(Model model, View view, String path) {
         this.model = model;
         this.view = view;
+        
+        this.caretaker = new Caretaker();
 
         model.setLevel(new GameObjects.Level(this));
         view.accept(themeVisitor);
@@ -42,6 +49,18 @@ public class Controller implements Runnable {
         model.getLevel().loadLevel(path);
         
         view.addPlayerMovementsListener(new PlayerMovementsListener(this));
+    }
+    
+    /**
+     * Only use this constructor in case the game crashed. It loads the previous state
+     * from the given Memento
+     * @param filename The path/filename of the Memento
+     * @param view The view on which the game will be shown
+     */
+    public Controller(String filename, View view) {
+        this.view = view;
+        this.caretaker = new Caretaker();
+        restoreMemento(filename);
     }
 
     public List<Player> getPlayers() {
@@ -56,9 +75,9 @@ public class Controller implements Runnable {
     public void run() {
         view.requestFocus();
         try {
-            gameloopv2();
+            gameloop();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e);
         }
     }
 
@@ -72,6 +91,9 @@ public class Controller implements Runnable {
 
     }
 
+    /**
+     * Stops the game.
+     */
     public synchronized void stop() {
         if (!isRunning) {
             return;
@@ -83,48 +105,29 @@ public class Controller implements Runnable {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    /**
+     * Add another player to the game.
+     * @param player The player that will be added
+     */
     public void addPlayer(Player player) {
         model.addPlayer(player);
     }
-
     
-    // Unknown
-    private void gameloopv1() throws IOException {
-        int fps = 0;
-        double timer = System.currentTimeMillis();
-        long lastTime = System.nanoTime();
-        double delta = 0;
-        double ns = 1000000000 / TARGET_FPS;
-
-        while (isRunning) {
-            long now = System.nanoTime();
-            delta += (now - lastTime) / ns;
-            lastTime = now;
-            while (delta >= 1) {
-                model.getLevel().tick();
-                for(Player mplayer:model.getPlayers())
-                    mplayer.tick();
-//                model.getPlayer().tick();
-                view.render();
-                fps++;
-                delta--;
-            }
-            if (System.currentTimeMillis() - timer >= 1000) {
-                System.out.println(fps);
-                fps = 0;
-                timer += 1000;
-            }
-        }
-    }
-    
-    // Kevin Glass - http://www.java-gaming.org/index.php?topic=24220.0
-    private void gameloopv2() throws IOException {
+    /**
+     * This gameloop is used to reach approx. 60FPS. This also defines how often the 
+     * user input is validated. By letting the thread sleep if the game is going above
+     * 60FPS no processor time is wasted. The game is definitely smooth at 60FPS.
+     * Noteice: Source: Kevin Glass - http://www.java-gaming.org/index.php?topic=24220.0
+     * @throws IOException 
+     */
+    private void gameloop() throws IOException {
         
         long lastLoopTime = System.nanoTime();
         final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
         long lastFpsTime = 0;
         int fps = 0;
+        int secOfMin = 0;
         
         // keep looping round til the game ends
         while (isRunning) {
@@ -143,16 +146,26 @@ public class Controller implements Runnable {
             // update our FPS counter if a second has passed since
             // we last recorded
             if (lastFpsTime >= 1000000000) {
-                System.out.println("(FPS: " + fps + ")");
+//                System.out.println("(FPS: " + fps + ")");
                 lastFpsTime = 0;
                 fps = 0;
+                secOfMin++;
+                
+                if(secOfMin==5) {
+                    System.out.println("Creating a Memento");
+                    createMemento("Test1_Memento");
+                }
+                
+                if(secOfMin==10) {
+                    System.out.println("Restoring a Memento");
+                    restoreMemento("Test1_Memento");
+                } 
             }
 
             // update the game logic
             model.getLevel().tick();
             for(Player mplayer:model.getPlayers())
                 mplayer.tick();
-//            model.getPlayer().tick();
 
             // draw everyting
             view.render();
@@ -171,16 +184,43 @@ public class Controller implements Runnable {
             } catch (InterruptedException ex) {
                 Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
             }
-;
         }
-        
     }
     
     public IVisitor getThemeVisitor() {
-		return themeVisitor;
-	}
+        return themeVisitor;
+    }
 
-	public void setThemeVisitor(IVisitor themeVisitor) {
-		this.themeVisitor = themeVisitor;
-	}
+    public void setThemeVisitor(IVisitor themeVisitor) {
+        this.themeVisitor = themeVisitor;
+    }
+    
+    
+    
+    // The following functions are for the Memento-Pattern
+
+    /**
+     * Creates a memento containing a snapshot of its current internal state
+     * @return The Memento. This is a snapshot of the currently used data.
+     */
+    private Model createMemento(String filename) {
+        caretaker.storeMemento(model, filename);
+//        Model newMemento = caretaker.getLatestMemento();
+        return model;
+    }
+    
+    /**
+     * Restores the previous state by using a snapshot/memento that was taken before.
+     * @param filename The path/filename to/of the saved memento that shall be restored
+     */
+    private void restoreMemento(String filename) {
+        System.out.println("Controller.restoreMemento(" + filename + ")");
+        Model oldMemento = caretaker.getMomento(filename);
+        this.model = oldMemento;
+        view.setController(this);
+        view.addPlayerMovementsListener(new PlayerMovementsListener(this));
+        view.accept(themeVisitor);
+    }
+
+    
 }

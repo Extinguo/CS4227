@@ -12,11 +12,13 @@ import java.awt.Rectangle;
 import Visitor.IVisitable;
 import Visitor.IVisitor;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Magd
  */
-public class GameObject implements IVisitable {
+public class GameObject implements IVisitable, Serializable {
     
     Rectangle me;
     Color color;
