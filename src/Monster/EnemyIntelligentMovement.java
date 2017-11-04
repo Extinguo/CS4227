@@ -91,9 +91,11 @@ public class EnemyIntelligentMovement {
                     dir=randomGen.nextInt(4);
                 }
             }
+
             time++;
             if(time==targetTime)
                 state=smart;
+
         }
         else if(state==smart)
         {

@@ -8,9 +8,6 @@ package Pacman;
 import GUI.Controller;
 import GUI.Model;
 import GUI.View;
-import Interceptor.ConcreteInterceptor;
-import Interceptor.Dispatcher;
-
 import javax.swing.JFrame;
 
 /**
@@ -26,12 +23,8 @@ public class Pacman {
                 
         View view = new View();
         Model model = new Model();
-        Dispatcher dispatcher = Dispatcher.getInstance();
-        ConcreteInterceptor interceptor = new ConcreteInterceptor();
-        dispatcher.register(interceptor);
         
-//        Controller controller = new Controller(model, view, "map.png");
-        Controller controller = new Controller("Test1_Memento", view);
+        Controller controller = new Controller(model, view,"map2.png");
         
         view.setController(controller);
         model.setController(controller);
