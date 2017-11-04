@@ -5,13 +5,15 @@
  */
 package GUI;
 
-import GameObjects.Player.Player;
-import MoveStrategy.PlayerMovementsListener;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import MoveStrategy.PlayerMovementsListener;
+import Player.Player;
+import Visitor.IVisitor;
+import Visitor.Theme1;
 
 /**
  *
@@ -25,13 +27,14 @@ public class Controller implements Runnable {
     private final int TARGET_FPS = 60;
     private boolean isRunning = false;
     private Thread thread;
+    private IVisitor themeVisitor = new Theme1();
 
     public Controller(Model model, View view, String path) {
         this.model = model;
         this.view = view;
 
         model.setLevel(new GameObjects.Level(this));
-
+        view.accept(themeVisitor);
         
         // Loads the level. Since the players are loaded with the map there 
         // the player reference is null until after this.
@@ -172,4 +175,12 @@ public class Controller implements Runnable {
         }
         
     }
+    
+    public IVisitor getThemeVisitor() {
+		return themeVisitor;
+	}
+
+	public void setThemeVisitor(IVisitor themeVisitor) {
+		this.themeVisitor = themeVisitor;
+	}
 }

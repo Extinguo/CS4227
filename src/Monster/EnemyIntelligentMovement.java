@@ -1,12 +1,9 @@
-package GameObjects;
+package Monster;
 
-import GUI.Controller;
-import GameObjects.Enemy;
 import GameObjects.Level;
-import GameObjects.Player.Player;
+import Player.Player;
 
 import java.awt.*;
-import java.util.List;
 import java.util.Random;
 
 public class EnemyIntelligentMovement {
