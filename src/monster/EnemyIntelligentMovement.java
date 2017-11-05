@@ -15,12 +15,11 @@ public class EnemyIntelligentMovement implements Serializable {
     private int state=random;
     private int right=0,left=1,up=2,down=3;
     private int dir=1;
-    public Random randomGen;
+    private Random randomGen;
     private int time=0;
     private int targetTime=60*30;
     private int speed=3;
     private Player player;
-    private int player_num;
     int n=1;
     
     public EnemyIntelligentMovement(Level level,Enemy enemy)

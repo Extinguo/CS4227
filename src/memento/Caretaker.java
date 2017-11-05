@@ -43,7 +43,7 @@ public class Caretaker {
                 ObjectOutputStream out = new ObjectOutputStream(fileOut)
         ) {
             out.writeObject(newMemento);
-            System.out.printf("Serialized data is saved in " + filename + ".ser");
+            System.out.println("Serialized data is saved in " + filename + ".ser");
             latestFilename = filename;
         } catch (IOException i) {
             Logger.getLogger(Caretaker.class.getName()).log(Level.WARNING, "IOException", i);

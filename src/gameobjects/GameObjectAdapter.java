@@ -5,6 +5,7 @@
  */
 package gameobjects;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -14,9 +15,11 @@ import java.awt.Graphics;
 public class GameObjectAdapter {
     
     Delegator renderFunc;
+    Delegator setColorFunc;
 
     public GameObjectAdapter(GameObject go) {
         renderFunc = args->go.render((Graphics)args[0]);
+        setColorFunc = args->go.setColor((Color)args[0]);
     }
     
     public GameObjectAdapter(Level l) {
@@ -26,6 +29,9 @@ public class GameObjectAdapter {
     
     public void doRenderFunc(Graphics g) {
         renderFunc.execute(g);
+    }
+    public void setColor(Color c) {
+        setColorFunc.execute(c);
     }
     
     
