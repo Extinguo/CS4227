@@ -4,14 +4,12 @@ Implemented Pattern:
   - Factory Method
   - Bridge 
   - Interceptor
+  - Memento
+  - Visitor
+  - Plugable Adapter
   
   (- Decorator [Player])
+  
 -----------------------------------------------------------------------
-
-Build in Visitor -> Yann    
-Multiplayer -> Bob
-
-If time: Memento -> Magd
-
- | (Detailed) UML-Diagramm -> Yann |
-( Sequencediagram -> Yann )
+SonarQube Rating: Passed (A)
+-----------------------------------------------------------------------
