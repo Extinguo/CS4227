@@ -13,24 +13,24 @@ import java.io.Serializable;
 /**
  *
  * @author Magd
- *
- *  Visitor
- *        Plugable Adapter
- *  Lambda Expression
- *  Concurrency
- *  Animation
+ * Try combining strategy and bridge
+ * Make this to a proper bridge
  */
 public abstract class CollisionDetection implements Serializable {
     
     protected Player player;
     protected Level level;
+    
+    protected I_CollisionAlgorithm collisionAlgorithm;
 
     /**
      * 
      * @param level Contains the level data.
+     * @param collisionAlgorithm The CollisionAlgorithm which will be used
      */
-    public CollisionDetection(Level level) {
+    public CollisionDetection(Level level, I_CollisionAlgorithm collisionAlgorithm) {
         this.level = level;
+        this.collisionAlgorithm = collisionAlgorithm; 
     }
     
     /**

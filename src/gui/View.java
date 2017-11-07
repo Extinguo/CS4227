@@ -54,9 +54,7 @@ public class View extends Canvas implements IVisitable {
         for(Player mplayer:controller.getPlayers())
             mplayer.render(g);
         
-        GameObjectAdapter goa = new GameObjectAdapter(controller.getLevel());
-        goa.doRenderFunc(g);
-//        controller.getLevel().render(g);
+        controller.getLevel().render(g);
 
         g.dispose();
         bs.show();

@@ -16,8 +16,11 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import collisiondetection.BeanCollisionDetection;
+import collisiondetection.BasicCollisionAlgorithm;
+import collisiondetection.PlayerEnemyCollisionDetection;
 import collisiondetection.WallCollisionDetection;
 import gui.Controller;
+import java.awt.Rectangle;
 import monster.Enemy;
 import monster.EnemyIntelligentMovement;
 import player.Player;
@@ -77,7 +80,6 @@ public class Level implements Serializable {
             IVisitor themeVisitor = this.controller.getThemeVisitor();
             BufferedImage map=ImageIO.read(new FileInputStream("Ressources/" + filename));
            // BufferedImage map=ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
-          //  BufferedImage map = ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
             this.width = map.getWidth();
             this.height = map.getHeight();
             int[] pixels = new int[width * height];
@@ -93,12 +95,12 @@ public class Level implements Serializable {
                             walls[xx][yy].accept(themeVisitor);
                             break;
                         case PLAYERCOLORINPNG:
-                            
                             Player playerWithSpeed = PlayerFactory.createNewPlayerWithSpeed("bob", 4, 4, xx*BLOCKSIZE+3, yy*BLOCKSIZE+3, BLOCKSIZE-8, BLOCKSIZE-8);
                             playerWithSpeed.accept(themeVisitor);
                             
-                            ((Speed)(playerWithSpeed)).setWallCollision(new WallCollisionDetection(this));
-                            ((Speed)(playerWithSpeed)).setBeanCollision(new BeanCollisionDetection(this));
+                            ((Speed)(playerWithSpeed)).setWallCollision(new WallCollisionDetection(this, new BasicCollisionAlgorithm()));
+                            ((Speed)(playerWithSpeed)).setBeanCollision(new BeanCollisionDetection(this, new BasicCollisionAlgorithm()));
+                            ((Speed)(playerWithSpeed)).setPlayerEnemyCollisionDetection(new PlayerEnemyCollisionDetection(this, new BasicCollisionAlgorithm()));
                             playerWithSpeed.setNum(count++);
                             controller.addPlayer(playerWithSpeed);
                             break;
@@ -143,7 +145,7 @@ public class Level implements Serializable {
 
         for (GameObject bean : beans) {
             GameObjectAdapter goa = new GameObjectAdapter(bean);
-            goa.doRenderFunc(g);
+            goa.render(g);
 //            bean.render(g);
         }
         
@@ -169,7 +171,15 @@ public class Level implements Serializable {
         return beans;
     }
 
-    public List<Enemy> getEnemys(){return enemys;}
+    public List<Enemy> getEnemys() { 
+        return enemys;
+    }
 
-    public Controller getController(){return this.controller;}
+    public Controller getController() { 
+        return this.controller;
+    }
+    
+    public Rectangle getBounds() {
+        return new Rectangle(width, height);
+    }
 }

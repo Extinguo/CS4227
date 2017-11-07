@@ -7,32 +7,70 @@ package gameobjects;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import visitor.IVisitor;
 
 /**
  *
  * @author Magd
+ * 
+ * Let know why this null thing is going on
  */
-public class GameObjectAdapter {
+public class GameObjectAdapter implements I_GameObject {
     
-    Delegator renderFunc;
-    Delegator setColorFunc;
+    private final Delegator renderFunc;
+    private final Delegator setColorFunc;
+    private final Delegator getBoundFunc;
+    private final Delegator acceptFunc;
 
-    public GameObjectAdapter(GameObject go) {
-        renderFunc = args->go.render((Graphics)args[0]);
-        setColorFunc = args->go.setColor((Color)args[0]);
-    }
-    
-    public GameObjectAdapter(Level l) {
-        renderFunc = args->l.render((Graphics)args[0]);
+    /**
+     * Pluggable Adapter for a GameObject
+     * @param gameObject The given GameObject is the adaptee
+     */
+    public GameObjectAdapter(GameObject gameObject) {
         
+        renderFunc = (args) -> {
+            gameObject.render((Graphics)args[0]);
+            return null;
+        };
+        
+        setColorFunc = (args) -> {
+            gameObject.setColor((Color)args[0]); 
+            return null; 
+        };
+        
+        getBoundFunc = (args) -> {
+            return gameObject.getBounds();
+        };
+        
+        acceptFunc = (args) -> {
+            gameObject.accept((IVisitor)args[0]);
+            return null;
+        };
     }
+   
     
-    public void doRenderFunc(Graphics g) {
+    @Override
+    public void render(Graphics g) {
         renderFunc.execute(g);
     }
+    
+    @Override
     public void setColor(Color c) {
         setColorFunc.execute(c);
     }
+
+    @Override
+    public Rectangle getBounds() {
+        return (Rectangle)getBoundFunc.execute();
+    }
+
+    @Override
+    public void accept(IVisitor visitor) {
+        acceptFunc.execute(visitor);
+    }
+
+
     
     
 }

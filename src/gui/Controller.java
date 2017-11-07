@@ -16,6 +16,8 @@ import player.Player;
 import visitor.IVisitor;
 import visitor.Theme1;
 import java.io.Serializable;
+import player.PlayerDecorator;
+import player.attributes.Speed;
 
 /**
  *
@@ -161,8 +163,15 @@ public class Controller implements Runnable, Serializable {
 
             // update the game logic
             model.getLevel().tick();
-            for(Player mplayer:model.getPlayers())
+            for(Player mplayer:model.getPlayers()) {
                 mplayer.tick();
+                boolean enemyPlayerCollision = checkForAnamyAndPlayerCollision(mplayer);
+                if(enemyPlayerCollision) {
+                   handleDeath(mplayer);
+                   checkAndHandleGameOver();
+                }
+            }
+                
 
             // draw everyting
             view.render();
@@ -182,6 +191,39 @@ public class Controller implements Runnable, Serializable {
                 Thread.currentThread().interrupt();
             }
         }
+    }
+    
+    /**
+     * Checks if a player is colliding with an enemy.
+     * @param p The player for who you want to check if he is colliding with an enemy
+     * @return True, if there is a collision. Otherwise false
+     */
+    private boolean checkForAnamyAndPlayerCollision(Player p) {
+        List<PlayerDecorator> decorators = p.getDecorators();
+        for (PlayerDecorator pd : decorators) {
+            if (pd instanceof Speed) {
+                if (((Speed) (p)).getPlayerEnemyCollision().collisionHappening(null)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+    
+    /**
+     * Handles the death of a player
+     * @param p The player that died
+     */
+    private void handleDeath(Player p) {
+    }
+    
+    /**
+     * If every player is dead, the game is over.
+     * This Method handles that scenario
+     */
+    private void checkAndHandleGameOver() {
+        
     }
     
     public IVisitor getThemeVisitor() {

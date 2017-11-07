@@ -5,6 +5,7 @@
  */
 package monster;
 
+import gameobjects.I_GameObject;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -17,7 +18,7 @@ import java.io.Serializable;
  *
  * @author Magd
  */
-public class Enemy implements IVisitable, Serializable  {
+public class Enemy implements IVisitable, Serializable, I_GameObject  {
     private EnemyIntelligentMovement enemyIntelligentMovement;
     Color color = Color.red;
 
@@ -30,25 +31,29 @@ public class Enemy implements IVisitable, Serializable  {
         me = new Rectangle(x, y, 24, 24);
     }
     
+    @Override
     public void render(Graphics g) {
         g.setColor(color);
         g.fillRect(me.x, me.y, me.width, me.height);
     }
-    public Rectangle getMe()
-    {
-        return me;
-    }
-    public void tick() {
-        this.enemyIntelligentMovement.tick();
-    }
     
+    @Override
     public void setColor(Color c) {
 		this.color = c;
     }
 
-	@Override
-	public void accept(IVisitor visitor) {
-		visitor.visit(this);       
-	}
+    @Override
+    public void accept(IVisitor visitor) {
+        visitor.visit(this);       
+    }
+    
+    @Override
+    public Rectangle getBounds() {
+        return me;
+    }
+    
+    public void tick() {
+        this.enemyIntelligentMovement.tick();
+    }
     
 }

@@ -18,7 +18,7 @@ import java.io.Serializable;
  *
  * @author Magd
  */
-public class GameObject implements IVisitable, Serializable {
+public class GameObject implements IVisitable, Serializable, I_GameObject {
 
     Rectangle me;
     Color color;
@@ -38,21 +38,13 @@ public class GameObject implements IVisitable, Serializable {
         this.color = color;
     }
 
-    /**
-     * Renders the Object.
-     *
-     * @param g The Graphics Object on which to render.
-     */
+    @Override
     public void render(Graphics g) {
         g.setColor(color);
         g.fillRect(me.x, me.y, me.width, me.height);
     }
 
-    /**
-     * Returns the bounds.
-     *
-     * @return Rectangle which has the bounds and the x/y position
-     */
+    @Override
     public Rectangle getBounds() {
         return me;
     }
@@ -62,6 +54,7 @@ public class GameObject implements IVisitable, Serializable {
         visitor.visit(this);
     }
 
+    @Override
     public void setColor(Color c) {
         this.color = c;
     }

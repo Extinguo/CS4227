@@ -10,8 +10,11 @@ import gui.Model;
 import gui.View;
 import interceptor.ConcreteInterceptor;
 import interceptor.Dispatcher;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import player.Player;
+import registerplayer.RegisterPlayer;
 
 /**
  *
@@ -23,7 +26,7 @@ public class Pacman {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-                
+                   
         View view = new View();
         Model model = new Model();
         Dispatcher dispatcher = Dispatcher.getInstance();
@@ -42,8 +45,20 @@ public class Pacman {
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        
         frame.setVisible(true);
+        
+//        ArrayList<Player> players = new ArrayList<>();
+//        String[] playerOptions = {"Plain Player", "Speed"};
+//        
+//        
+//        RegisterPlayer rp = new RegisterPlayer(playerOptions, frame);
+//        rp.setVisible(true);
+//        players = rp.createPlayers();
+//        for(Player p : players) {
+//            System.out.println("Name: " + p.getName());
+//        }
+        
+//        model.setPlayers(players);
         controller.start();
     }
     

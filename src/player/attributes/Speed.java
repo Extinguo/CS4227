@@ -6,6 +6,7 @@
 package player.attributes;
 
 import collisiondetection.BeanCollisionDetection;
+import collisiondetection.PlayerEnemyCollisionDetection;
 import collisiondetection.WallCollisionDetection;
 import gameobjects.Helper;
 import gameobjects.Helper.Direction;
@@ -29,6 +30,7 @@ public class Speed extends PlayerDecorator {
     
     WallCollisionDetection wallCollision;
     BeanCollisionDetection beanCollision;
+    PlayerEnemyCollisionDetection peCollision;
 
     public Speed(Player newPlayer, int speed ) {
         super(newPlayer);
@@ -110,6 +112,14 @@ public class Speed extends PlayerDecorator {
         beanCollision.setPlayer(this);
     }
     
+    public void setPlayerEnemyCollisionDetection(PlayerEnemyCollisionDetection peCollision) {
+        this.peCollision = peCollision;
+        peCollision.setPlayer(this);
+    }
+    
     public WallCollisionDetection getWallCollision() { return wallCollision; }
     public BeanCollisionDetection getBeanCollision() { return beanCollision; }
+    public PlayerEnemyCollisionDetection getPlayerEnemyCollision() {
+        return peCollision;
+    }
 }

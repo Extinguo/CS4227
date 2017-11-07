@@ -21,13 +21,13 @@ import visitor.IVisitor;
  */
 public class PlainPlayer implements Player, IVisitable {
 
-    private String name = "RandomName";
-    private int lifes = 3;
-    private int score = 0;
-    private int eatBeans=0;
-    private List<PlayerDecorator> decorators;
-    private Rectangle me;  
-    private Color color = Color.yellow;
+    protected String name = "RandomName";
+    protected int lifes = 3;
+    protected int score = 0;
+    protected int eatBeans=0;
+    protected List<PlayerDecorator> decorators;
+    protected Rectangle me;  
+    protected Color color = Color.yellow;
 
     private int num;
 
@@ -110,14 +110,14 @@ public class PlainPlayer implements Player, IVisitable {
     }
     
     @Override
-	public void accept(IVisitor visitor) {
-		visitor.visit(this);    
-	}
+    public void accept(IVisitor visitor) {
+        visitor.visit(this);
+    }
 
-	@Override
-	public void setColor(Color c) {
-		this.color = c;
-	}
+    @Override
+    public void setColor(Color c) {
+        this.color = c;
+    }
 
     
 }

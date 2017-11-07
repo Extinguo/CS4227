@@ -1,5 +1,5 @@
 projectKey=my:Pacman
 serverUrl=http://localhost:9000
 dashboardUrl=http://localhost:9000/dashboard/index/my:Pacman
-ceTaskId=AV-NrIzBFGpNOhP92pgs
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AV-NrIzBFGpNOhP92pgs
+ceTaskId=AV-SaZ2ZWkkEpKXZnFgc
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AV-SaZ2ZWkkEpKXZnFgc

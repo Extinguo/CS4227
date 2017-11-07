@@ -9,6 +9,7 @@ package gameobjects;
  *
  * @author Magd
  */
+@FunctionalInterface
 public interface Delegator {
-    public void execute(Object... args);
+    public Object execute(Object... args);
 }

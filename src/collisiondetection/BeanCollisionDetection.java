@@ -18,18 +18,19 @@ import java.io.IOException;
  */
 public class BeanCollisionDetection extends CollisionDetection {
 
-    public BeanCollisionDetection(Level level) {
-        super(level);
+    public BeanCollisionDetection(Level level, I_CollisionAlgorithm collisionAlgorithm) {
+        super(level, collisionAlgorithm);
     }
 
     @Override
     public boolean collisionHappening(Helper.Direction direction) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
     public void eatBean() throws IOException {
         for(int i=0;i<this.level.getBeans().size();i++)
         {
-            if(player.getBounds().intersects(level.getBeans().get(i).getBounds()))
+            if(collisionAlgorithm.collisionHappening(player, level.getBeans().get(i)))
             {
                 level.getBeans().remove(i);
                 player.setEatbeans(player.getEatbeans()+1);

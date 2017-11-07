@@ -31,7 +31,7 @@ public class EnemyIntelligentMovement implements Serializable {
     }
     public boolean canMove(int nextX,int nextY)
     {
-        Rectangle bounds=new Rectangle(nextX,nextY,enemy.getMe().width,enemy.getMe().height);
+        Rectangle bounds=new Rectangle(nextX,nextY,enemy.getBounds().width,enemy.getBounds().height);
         for(int xx=0;xx<level.getWalls().length;xx++)
           for(int yy=0;yy<level.getWalls()[0].length;yy++)
           {
@@ -51,9 +51,9 @@ public class EnemyIntelligentMovement implements Serializable {
         {
             if(dir==right)
             {
-                if(canMove(enemy.getMe().x+speed,enemy.getMe().y))
+                if(canMove(enemy.getBounds().x+speed,enemy.getBounds().y))
                 {
-                    enemy.getMe().setLocation(enemy.getMe().x+speed,enemy.getMe().y);
+                    enemy.getBounds().setLocation(enemy.getBounds().x+speed,enemy.getBounds().y);
                 }
                 else{
                     dir=randomGen.nextInt(4);
@@ -61,9 +61,9 @@ public class EnemyIntelligentMovement implements Serializable {
             }
             else if(dir==left)
             {
-                if(canMove(enemy.getMe().x-speed,enemy.getMe().y))
+                if(canMove(enemy.getBounds().x-speed,enemy.getBounds().y))
                 {
-                    enemy.getMe().setLocation(enemy.getMe().x-speed,enemy.getMe().y);
+                    enemy.getBounds().setLocation(enemy.getBounds().x-speed,enemy.getBounds().y);
                 }
                 else
                 {
@@ -72,9 +72,9 @@ public class EnemyIntelligentMovement implements Serializable {
             }
             else if(dir==up)
             {
-                if(canMove(enemy.getMe().x,enemy.getMe().y-speed))
+                if(canMove(enemy.getBounds().x,enemy.getBounds().y-speed))
                 {
-                    enemy.getMe().setLocation(enemy.getMe().x,enemy.getMe().y-speed);
+                    enemy.getBounds().setLocation(enemy.getBounds().x,enemy.getBounds().y-speed);
                 }
                 else
                 {
@@ -83,9 +83,9 @@ public class EnemyIntelligentMovement implements Serializable {
             }
             else if(dir==down)
             {
-                if(canMove(enemy.getMe().x,enemy.getMe().y+speed))
+                if(canMove(enemy.getBounds().x,enemy.getBounds().y+speed))
                 {
-                    enemy.getMe().setLocation(enemy.getMe().x,enemy.getMe().y+speed);
+                    enemy.getBounds().setLocation(enemy.getBounds().x,enemy.getBounds().y+speed);
                 }
                 else
                 {
@@ -104,32 +104,32 @@ public class EnemyIntelligentMovement implements Serializable {
                 player = level.getController().getPlayers().get(randomGen.nextInt(m));
                 n++;
             }
-            if(enemy.getMe().x<player.getBounds().x)
+            if(enemy.getBounds().x<player.getBounds().x)
             {
-                if(canMove(enemy.getMe().x+speed,enemy.getMe().y))
+                if(canMove(enemy.getBounds().x+speed,enemy.getBounds().y))
                 {
-                    enemy.getMe().setLocation(enemy.getMe().x+speed,enemy.getMe().y);
+                    enemy.getBounds().setLocation(enemy.getBounds().x+speed,enemy.getBounds().y);
                 }
             }
-            if(enemy.getMe().x>player.getBounds().x)
+            if(enemy.getBounds().x>player.getBounds().x)
             {
-                if(canMove(enemy.getMe().x-speed,enemy.getMe().y))
+                if(canMove(enemy.getBounds().x-speed,enemy.getBounds().y))
                 {
-                    enemy.getMe().setLocation(enemy.getMe().x-speed,enemy.getMe().y);
+                    enemy.getBounds().setLocation(enemy.getBounds().x-speed,enemy.getBounds().y);
                 }
             }
-            if(enemy.getMe().y<player.getBounds().y)
+            if(enemy.getBounds().y<player.getBounds().y)
             {
-                if(canMove(enemy.getMe().x,enemy.getMe().y+speed))
+                if(canMove(enemy.getBounds().x,enemy.getBounds().y+speed))
                 {
-                    enemy.getMe().setLocation(enemy.getMe().x,enemy.getMe().y+speed);
+                    enemy.getBounds().setLocation(enemy.getBounds().x,enemy.getBounds().y+speed);
                 }
             }
-            if(enemy.getMe().y>player.getBounds().y)
+            if(enemy.getBounds().y>player.getBounds().y)
             {
-                if(canMove(enemy.getMe().x,enemy.getMe().y-speed))
+                if(canMove(enemy.getBounds().x,enemy.getBounds().y-speed))
                 {
-                    enemy.getMe().setLocation(enemy.getMe().x,enemy.getMe().y-speed);
+                    enemy.getBounds().setLocation(enemy.getBounds().x,enemy.getBounds().y-speed);
                 }
             }
             boolean move=false;
