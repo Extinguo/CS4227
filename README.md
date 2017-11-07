@@ -1,17 +1,17 @@
 Implemented Pattern:
+  - Interceptor
   - Model View Controller
+
   - Command
   - Factory Method
-  - Bridge 
-  - Interceptor
+  - Bridge
+  - Memento
+  - Visitor
+  - Plugable Adapter
+  - Strategy
   
   (- Decorator [Player])
+  
 -----------------------------------------------------------------------
-
-Build in Visitor -> Yann    
-Multiplayer -> Bob
-
-If time: Memento -> Magd
-
- | (Detailed) UML-Diagramm -> Yann |
-( Sequencediagram -> Yann )
+SonarQube Rating: Passed (A)
+-----------------------------------------------------------------------
