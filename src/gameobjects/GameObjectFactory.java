@@ -13,7 +13,7 @@ import java.awt.Color;
  */
 public class GameObjectFactory {
     
-    private GameObjectFactory() {}
+    public GameObjectFactory() {}
     
     /**
      * Returns a wall. 
