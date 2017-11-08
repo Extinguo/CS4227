@@ -5,7 +5,6 @@
  */
 package gui;
 
-import gameobjects.GameObjectAdapter;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
