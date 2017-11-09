@@ -13,7 +13,7 @@ import player.attributes.Speed;
  */
 public class PlayerFactory {
     
-    private PlayerFactory() {}
+    public PlayerFactory() {}
     
     public static Player createPlainPlayer(int x, int y, int width, int height) {
         return new PlainPlayer(x, y, width, height);

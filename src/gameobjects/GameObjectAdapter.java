@@ -14,13 +14,13 @@ import visitor.IVisitor;
  *
  * @author Magd
  * 
- * Let know why this null thing is going on
  */
+
 public class GameObjectAdapter implements I_GameObject {
     
     private final Delegator renderFunc;
     private final Delegator setColorFunc;
-    private final Delegator getBoundFunc;
+    private final DelegatorWithReturn getBoundFunc;
     private final Delegator acceptFunc;
 
     /**
@@ -29,24 +29,10 @@ public class GameObjectAdapter implements I_GameObject {
      */
     public GameObjectAdapter(GameObject gameObject) {
         
-        renderFunc = (args) -> {
-            gameObject.render((Graphics)args[0]);
-            return null;
-        };
-        
-        setColorFunc = (args) -> {
-            gameObject.setColor((Color)args[0]); 
-            return null; 
-        };
-        
-        getBoundFunc = (args) -> {
-            return gameObject.getBounds();
-        };
-        
-        acceptFunc = (args) -> {
-            gameObject.accept((IVisitor)args[0]);
-            return null;
-        };
+        renderFunc = args -> gameObject.render((Graphics)args[0]);
+        setColorFunc = args -> gameObject.setColor((Color)args[0]);
+        getBoundFunc = args -> gameObject.getBounds();
+        acceptFunc = args -> gameObject.accept((IVisitor)args[0]);
     }
    
     
@@ -69,8 +55,5 @@ public class GameObjectAdapter implements I_GameObject {
     public void accept(IVisitor visitor) {
         acceptFunc.execute(visitor);
     }
-
-
-    
     
 }
