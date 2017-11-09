@@ -1,5 +1,3 @@
-
-
 import gameobjects.GameObjectFactory;
 import monster.EnemyFactory;
 import org.junit.Assert;
