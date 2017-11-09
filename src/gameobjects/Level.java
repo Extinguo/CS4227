@@ -21,15 +21,14 @@ import collisiondetection.PlayerEnemyCollisionDetection;
 import collisiondetection.WallCollisionDetection;
 import gui.Controller;
 import java.awt.Rectangle;
-import monster.Enemy;
-import monster.EnemyIntelligentMovement;
+
 import player.Player;
 import player.PlayerFactory;
 import player.attributes.Speed;
 import visitor.IVisitor;
 
 import java.io.Serializable;
-
+import monster.*;
 /**
  *
  * @author Magd

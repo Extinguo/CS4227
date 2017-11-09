@@ -2,9 +2,8 @@ package visitor;
 
 import gui.View;
 import gameobjects.GameObject;
-import monster.Enemy;
 import player.Player;
-
+import monster.*;
 public interface IVisitor {
 
     void visit(Enemy o);

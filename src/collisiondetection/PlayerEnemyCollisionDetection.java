@@ -28,5 +28,36 @@ public class PlayerEnemyCollisionDetection extends CollisionDetection {
         }
         return false;
     }
+    public void enemyplayercollision()
+    {
+        if(getplayerFalseNum()==0)
+            System.exit(0);
+        int k=0;
+        for(int i=0;i<level.getEnemys().size();i++)
+        {
+            if(collisionAlgorithm.collisionHappening(player,level.getEnemys().get(i)))
+            {
+                player.setLifes(player.getLifes()-1);
+                System.out.println(player.getLifes());
+                if(player.getLifes()==0) {
+                    player.setAvaliable(false);
+                }
+            }
+        }
+        for(int i=0;i<level.getController().getPlayers().size();i++)
+        {
+            System.out.println(level.getController().getPlayers().get(i).getAvaliable());
+        }
+    }
+    public int getplayerFalseNum()
+    {
+        int k=0;
+        for(int i=0;i<level.getController().getPlayers().size();i++)
+        {
+            if(level.getController().getPlayers().get(i).getAvaliable()==true)
+                k++;
+        }
+        return k;
+    }
     
 }

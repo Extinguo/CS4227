@@ -46,53 +46,53 @@ public class PlayerMovementsListener implements KeyListener {
         switch (e.getKeyCode()) {
             //player 1
             case KeyEvent.VK_UP:
-                if(controller.getPlayers().get(0)!=null)
+                if(controller.getPlayers().get(0).getAvaliable())
                  invoker.upPressed(0);
                 break;
             case KeyEvent.VK_DOWN:
-                if(controller.getPlayers().get(0)!=null)
+                if(controller.getPlayers().get(0).getAvaliable())
                  invoker.downPressed(0);
                 break;
             case KeyEvent.VK_RIGHT:
-                if(controller.getPlayers().get(0)!=null)
+                if(controller.getPlayers().get(0).getAvaliable())
                  invoker.rightPressed(0);
                 break;
             case KeyEvent.VK_LEFT:
-                if(controller.getPlayers().get(0)!=null)
+                if(controller.getPlayers().get(0).getAvaliable())
                  invoker.leftPressed(0);
                 break;
                 //player 2
             case KeyEvent.VK_W:
-                if(controller.getPlayers().size()>=2)
+                if(controller.getPlayers().get(1).getAvaliable())
                  invoker.upPressed(1);
                 break;
             case KeyEvent.VK_S:
-                if(controller.getPlayers().size()>=2)
+                if(controller.getPlayers().get(1).getAvaliable())
                  invoker.downPressed(1);
                 break;
             case KeyEvent.VK_A:
-                if(controller.getPlayers().size()>=2)
+                if(controller.getPlayers().get(1).getAvaliable())
                  invoker.leftPressed(1);
                 break;
             case KeyEvent.VK_D:
-                if(controller.getPlayers().size()>=2)
+                if(controller.getPlayers().get(1).getAvaliable())
                  invoker.rightPressed(1);
                 break;
                 //player 3
             case KeyEvent.VK_I:
-                if(controller.getPlayers().size()>=3)
+                if(controller.getPlayers().get(2).getAvaliable())
                     invoker.upPressed(2);
                 break;
             case KeyEvent.VK_K:
-                if(controller.getPlayers().size()>=3)
+                if(controller.getPlayers().get(2).getAvaliable())
                     invoker.downPressed(2);
                 break;
             case KeyEvent.VK_J:
-                if(controller.getPlayers().size()>=3)
+                if(controller.getPlayers().get(2).getAvaliable())
                    invoker.leftPressed(2);
                 break;
             case KeyEvent.VK_L:
-                if(controller.getPlayers().size()>=3)
+                if(controller.getPlayers().get(2).getAvaliable())
                   invoker.rightPressed(2);
                 break;
             case KeyEvent.VK_T:
@@ -123,50 +123,50 @@ public class PlayerMovementsListener implements KeyListener {
         }
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                if(controller.getPlayers().get(0)!=null)
+                if(controller.getPlayers().get(0).getAvaliable())
                  invoker.undoupPressed(0);
                 break;
             case KeyEvent.VK_DOWN:
-                if(controller.getPlayers().get(0)!=null)
+                if(controller.getPlayers().get(0).getAvaliable())
                   invoker.undodownPressed(0);
                 break;
             case KeyEvent.VK_RIGHT:
-                if(controller.getPlayers().get(0)!=null)
+                if(controller.getPlayers().get(0).getAvaliable())
                   invoker.undorightpressed(0);
                 break;
             case KeyEvent.VK_LEFT:
-                if(controller.getPlayers().get(0)!=null)
+                if(controller.getPlayers().get(0).getAvaliable())
                   invoker.undoleftPressed(0);
                 break;
             case KeyEvent.VK_W:
-                if(controller.getPlayers().size()>=2)
+                if(controller.getPlayers().get(1).getAvaliable())
                   invoker.undoupPressed(1);
                 break;
             case KeyEvent.VK_S:
-                if(controller.getPlayers().size()>=2)
+                if(controller.getPlayers().get(1).getAvaliable())
                     invoker.undodownPressed(1);
                 break;
             case KeyEvent.VK_A:
-                if(controller.getPlayers().size()>=2)
+                if(controller.getPlayers().get(1).getAvaliable())
                    invoker.undoleftPressed(1);
                 break;
             case KeyEvent.VK_D:
-                if(controller.getPlayers().size()>=2)
+                if(controller.getPlayers().get(1).getAvaliable())
                    invoker.undorightpressed(1);
             case KeyEvent.VK_I:
-                if(controller.getPlayers().size()>=3)
+                if(controller.getPlayers().get(2).getAvaliable())
                    invoker.undoupPressed(2);
                 break;
             case KeyEvent.VK_K:
-                if(controller.getPlayers().size()>=3)
+                if(controller.getPlayers().get(2).getAvaliable())
                    invoker.undodownPressed(2);
                 break;
             case KeyEvent.VK_J:
-                if(controller.getPlayers().size()>=3)
+                if(controller.getPlayers().get(2).getAvaliable())
                    invoker.undoleftPressed(2);
                 break;
             case KeyEvent.VK_L:
-                if(controller.getPlayers().size()>=3)
+                if(controller.getPlayers().get(2).getAvaliable())
                   invoker.undorightpressed(2);
                 break;
             case KeyEvent.VK_T:

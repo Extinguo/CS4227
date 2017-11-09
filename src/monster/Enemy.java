@@ -44,7 +44,7 @@ public class Enemy implements IVisitable, Serializable, I_GameObject  {
 
     @Override
     public void accept(IVisitor visitor) {
-        visitor.visit(this);       
+        visitor.visit(this);
     }
     
     @Override

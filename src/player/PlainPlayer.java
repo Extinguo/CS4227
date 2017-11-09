@@ -22,6 +22,7 @@ import visitor.IVisitor;
 public class PlainPlayer implements Player, IVisitable {
 
     protected String name = "RandomName";
+    protected boolean avaliable=true;
     protected int lifes = 3;
     protected int score = 0;
     protected int eatBeans=0;
@@ -69,8 +70,10 @@ public class PlainPlayer implements Player, IVisitable {
     
     @Override
     public void render(Graphics g) {
-        g.setColor(color);
-        g.fillRect(me.x, me.y, me.width, me.height);
+        if(this.getAvaliable()==true) {
+            g.setColor(color);
+            g.fillRect(me.x, me.y, me.width, me.height);
+        }
     }
 
     @Override
@@ -115,9 +118,20 @@ public class PlainPlayer implements Player, IVisitable {
     }
 
     @Override
+    public void setAvaliable(boolean avaliable) {
+        this.avaliable=avaliable;
+    }
+
+    @Override
+    public boolean getAvaliable() {
+        return this.avaliable;
+    }
+
+    @Override
     public void setColor(Color c) {
         this.color = c;
     }
+
 
     
 }

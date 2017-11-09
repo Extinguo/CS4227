@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import gui.View;
 import gameobjects.GameObject;
-import gameobjects.GameObjectAdapter;
 import monster.Enemy;
 import player.Player;
 

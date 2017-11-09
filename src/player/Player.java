@@ -48,4 +48,7 @@ public interface Player extends Serializable {
     public void setColor(Color c);
     
     public void accept(IVisitor visitor);
+
+    public void setAvaliable(boolean avaliable);
+    public boolean getAvaliable();
 }
