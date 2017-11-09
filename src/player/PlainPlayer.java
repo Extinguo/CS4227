@@ -27,9 +27,8 @@ public class PlainPlayer implements Player, IVisitable {
     protected int score = 0;
     protected int eatBeans=0;
     protected List<PlayerDecorator> decorators;
-    protected Rectangle me;  
-    protected Color color = Color.yellow;
-
+    protected Rectangle me;
+    protected Color color =Color.GREEN;
     private int num;
 
     public PlainPlayer(int x, int y, int width, int height) {
@@ -72,7 +71,8 @@ public class PlainPlayer implements Player, IVisitable {
     public void render(Graphics g) {
         if(this.getAvaliable()==true) {
             g.setColor(color);
-            g.fillRect(me.x, me.y, me.width, me.height);
+            g.fillOval(me.x,me.y,me.width,me.height);
+//            g.fillRect(me.x, me.y, me.width, me.height);
         }
     }
 

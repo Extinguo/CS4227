@@ -18,6 +18,7 @@ import visitor.Theme1;
 import java.io.Serializable;
 import player.PlayerDecorator;
 import player.attributes.Speed;
+import visitor.Theme2;
 
 /**
  *

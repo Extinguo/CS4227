@@ -21,7 +21,6 @@ public class Theme1 implements IVisitor {
     public void visit(Player o) {
         o.setColor(Color.yellow);
     }
-
     public void visit(View o) {
         o.setBackgroundColor(Color.BLACK);
     }
