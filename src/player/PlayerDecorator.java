@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package player;
 
 import java.awt.Color;
@@ -12,14 +7,12 @@ import java.io.IOException;
 import java.util.List;
 
 import gameobjects.Helper;
+import java.io.Serializable;
 import visitor.IVisitable;
 import visitor.IVisitor;
 
-/**
- *
- * @author Magd
- */
-public abstract class PlayerDecorator implements Player, IVisitable{
+
+public abstract class PlayerDecorator implements Player, IVisitable, Serializable {
     
     protected Player tempPlayer;
 

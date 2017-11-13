@@ -10,11 +10,8 @@ import gui.Model;
 import gui.View;
 import interceptor.ConcreteInterceptor;
 import interceptor.Dispatcher;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import player.Player;
-import registerplayer.RegisterPlayer;
 
 /**
  *
@@ -34,7 +31,6 @@ public class Pacman {
         dispatcher.register(interceptor);
         
         Controller controller = new Controller(model, view, "map.png");
-//        Controller controller = new Controller("Test1_Memento", view);
         
         view.setController(controller);
         model.setController(controller);
@@ -47,18 +43,6 @@ public class Pacman {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         
-//        ArrayList<Player> players = new ArrayList<>();
-//        String[] playerOptions = {"Plain Player", "Speed"};
-//        
-//        
-//        RegisterPlayer rp = new RegisterPlayer(playerOptions, frame);
-//        rp.setVisible(true);
-//        players = rp.createPlayers();
-//        for(Player p : players) {
-//            System.out.println("Name: " + p.getName());
-//        }
-        
-//        model.setPlayers(players);
         controller.start();
     }
     

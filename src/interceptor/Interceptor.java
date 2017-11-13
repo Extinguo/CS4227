@@ -2,9 +2,6 @@ package interceptor;
 
 import java.io.IOException;
 
-/**
- * Created by viola on 2017/10/20.
- */
 
 @FunctionalInterface
 public interface Interceptor {

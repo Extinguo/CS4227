@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package memento;
 
 import gui.Model;
@@ -22,14 +17,15 @@ import java.util.logging.Logger;
  * The Model class keeps all information, hence it is the Memento
  * Originator is the Controller class.
  * 
- * @author Magd
  */
 public class Caretaker {
     
     private String latestFilename;
+    private Logger logger;
 
     public Caretaker() {
         latestFilename = "";
+        logger = Logger.getLogger(Caretaker.class.getName());
     }
     
     /**
@@ -43,11 +39,10 @@ public class Caretaker {
                 ObjectOutputStream out = new ObjectOutputStream(fileOut)
         ) {
             out.writeObject(newMemento);
-            System.out.println("Serialized data is saved in " + filename + ".ser");
+            logger.log(Level.INFO, "Serialized data is saved in: {0}.ser", filename);
             latestFilename = filename;
         } catch (IOException i) {
-            Logger.getLogger(Caretaker.class.getName()).log(Level.WARNING, "IOException", i);
-            System.err.println(i);
+            logger.log(Level.WARNING, "IOException", i);
         }
     }
     
@@ -57,7 +52,6 @@ public class Caretaker {
      * @return The Memento
      */
     public Model getMomento(String filename) {
-        System.out.println("Caretaker.getMemento(" + filename + ")");
         Model loadMemento = null;
         
         try( FileInputStream fileIn = new FileInputStream(filename + ".ser");
@@ -65,9 +59,9 @@ public class Caretaker {
         ) {
             loadMemento = (Model) in.readObject();
         } catch (IOException i) {
-            System.err.println(i);
+            logger.log(Level.INFO, "Exception", i);
         } catch (ClassNotFoundException c) {
-            Logger.getLogger(Caretaker.class.getName()).log(Level.WARNING, "Model class not found", c);
+            logger.log(Level.WARNING, "Model class not found", c);
         }
         return loadMemento;
     }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import memento.Caretaker;
@@ -18,12 +13,8 @@ import visitor.Theme1;
 import java.io.Serializable;
 import player.PlayerDecorator;
 import player.attributes.Speed;
-import visitor.Theme2;
 
-/**
- *
- * @author Magd
- */
+
 public class Controller implements Runnable, Serializable {
 
     private Model model;
@@ -35,6 +26,7 @@ public class Controller implements Runnable, Serializable {
     private transient IVisitor themeVisitor = new Theme1();
     
     private transient Caretaker caretaker;
+    private Logger logger;
 
     public Controller(Model model, View view, String path) {
         this.model = model;
@@ -51,6 +43,8 @@ public class Controller implements Runnable, Serializable {
         model.getLevel().loadLevel(path);
         
         view.addPlayerMovementsListener(new PlayerMovementsListener(this));
+        
+        logger = Logger.getLogger(Controller.class.getName());
     }
     
     /**
@@ -151,26 +145,25 @@ public class Controller implements Runnable, Serializable {
                 lastFpsTime = 0;
                 secOfMin++;
                 
-                if(secOfMin==5) {
-                    System.out.println("Creating a Memento");
-                    createMemento("Test1_Memento");
+                // Creates a new Memento every minute
+                if(secOfMin>=60) {
+                    logger.log(Level.INFO, "Saving the game");
+                    createMemento("SaveGame");
+                    secOfMin = 0;
+                    
                 }
                 
-                if(secOfMin==10) {
-                    System.out.println("Restoring a Memento");
-                    restoreMemento("Test1_Memento");
-                } 
+                // Uncomment to test Memento
+//                if(secOfMin==10) {
+//                    System.out.println("Restoring a Memento");
+//                    restoreMemento("Test1_Memento");
+//                } 
             }
 
             // update the game logic
             model.getLevel().tick();
             for(Player mplayer:model.getPlayers()) {
                 mplayer.tick();
-                boolean enemyPlayerCollision = checkForAnamyAndPlayerCollision(mplayer);
-                if(enemyPlayerCollision) {
-                   handleDeath(mplayer);
-                   checkAndHandleGameOver();
-                }
             }
                 
 
@@ -194,38 +187,7 @@ public class Controller implements Runnable, Serializable {
         }
     }
     
-    /**
-     * Checks if a player is colliding with an enemy.
-     * @param p The player for who you want to check if he is colliding with an enemy
-     * @return True, if there is a collision. Otherwise false
-     */
-    private boolean checkForAnamyAndPlayerCollision(Player p) {
-        List<PlayerDecorator> decorators = p.getDecorators();
-        for (PlayerDecorator pd : decorators) {
-            if (pd instanceof Speed) {
-                if (((Speed) (p)).getPlayerEnemyCollision().collisionHappening(null)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
     
-    /**
-     * Handles the death of a player
-     * @param p The player that died
-     */
-    private void handleDeath(Player p) {
-    }
-    
-    /**
-     * If every player is dead, the game is over.
-     * This Method handles that scenario
-     */
-    private void checkAndHandleGameOver() {
-        
-    }
     
     public IVisitor getThemeVisitor() {
         return themeVisitor;

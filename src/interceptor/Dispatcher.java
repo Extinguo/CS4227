@@ -3,9 +3,7 @@ package interceptor;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by viola on 2017/10/20.
- */
+
 public class Dispatcher{
 
     private ArrayList<Interceptor> interceptorList;

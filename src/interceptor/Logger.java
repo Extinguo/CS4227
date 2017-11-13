@@ -6,9 +6,7 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 
-/**
- * Created by viola on 2017/10/20.
- */
+
 public class Logger {
 
     public void logEatBeans(I_Context context) throws IOException {

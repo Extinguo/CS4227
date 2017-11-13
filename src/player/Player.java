@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package player;
 
 import java.awt.Color;
@@ -15,10 +10,7 @@ import gameobjects.Helper;
 import visitor.IVisitor;
 import java.io.Serializable;
 
-/**
- *
- * @author Magd
- */
+
 public interface Player extends Serializable {
     
     public String getName();

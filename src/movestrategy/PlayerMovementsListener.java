@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package movestrategy;
 
 import gui.Controller;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.logging.Level;
 
-/**
- *
- * @author Magd
- */
+
 public class PlayerMovementsListener implements KeyListener {
 
     Controller controller;
@@ -153,6 +146,7 @@ public class PlayerMovementsListener implements KeyListener {
             case KeyEvent.VK_D:
                 if(controller.getPlayers().get(1).getAvaliable())
                    invoker.undorightpressed(1);
+                break;
             case KeyEvent.VK_I:
                 if(controller.getPlayers().get(2).getAvaliable())
                    invoker.undoupPressed(2);
@@ -199,6 +193,7 @@ public class PlayerMovementsListener implements KeyListener {
             moveCommands[3]=new RightCommand(controller.getPlayers().get(i));
             invoker.setCommand(i,moveCommands[0],moveCommands[1],moveCommands[2],moveCommands[3]);
         }
-        System.out.println("The number of players "+ controller.getPlayers().size());
+        java.util.logging.Logger.getLogger(
+                PlayerMovementsListener.class.getName()).log(Level.INFO, "The number of Players: " + controller.getPlayers().size());
     }
 }

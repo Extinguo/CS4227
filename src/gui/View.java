@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import java.awt.Canvas;
@@ -16,10 +11,7 @@ import player.Player;
 import visitor.IVisitable;
 import visitor.IVisitor;
 
-/**
- *
- * @author Magd
- */
+
 public class View extends Canvas implements IVisitable {
     
     Controller controller;

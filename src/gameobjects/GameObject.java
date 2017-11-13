@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gameobjects;
 
 import java.awt.Color;
@@ -14,10 +9,7 @@ import visitor.IVisitor;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Magd
- */
+
 public class GameObject implements IVisitable, Serializable, I_GameObject {
 
     Rectangle me;

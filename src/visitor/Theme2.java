@@ -7,10 +7,6 @@ import gameobjects.GameObject;
 import monster.Enemy;
 import player.Player;
 
-/**
-*
-* @author Yann Mace
-*/
 
 public class Theme2 implements IVisitor {
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gameobjects;
 
 import java.awt.Graphics;
@@ -29,10 +24,8 @@ import visitor.IVisitor;
 
 import java.io.Serializable;
 import monster.*;
-/**
- *
- * @author Magd
- */
+
+
 public class Level implements Serializable {
     
     private static final int BLOCKSIZE = 32;
@@ -78,7 +71,6 @@ public class Level implements Serializable {
         try {
             IVisitor themeVisitor = this.controller.getThemeVisitor();
             BufferedImage map=ImageIO.read(new FileInputStream("Ressources/" + filename));
-           // BufferedImage map=ImageIO.read(new FileInputStream("/Users/apple/IdeaProjects/CS4227/Ressources/map.png"));
             this.width = map.getWidth();
             this.height = map.getHeight();
             int[] pixels = new int[width * height];
@@ -145,7 +137,6 @@ public class Level implements Serializable {
         for (GameObject bean : beans) {
             GameObjectAdapter goa = new GameObjectAdapter(bean);
             goa.render(g);
-//            bean.render(g);
         }
         
         for(Enemy e : enemys) {

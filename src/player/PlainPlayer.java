@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package player;
 
 import java.awt.Color;
@@ -15,10 +10,7 @@ import gameobjects.Helper;
 import visitor.IVisitable;
 import visitor.IVisitor;
 
-/**
- *
- * @author Magd
- */
+
 public class PlainPlayer implements Player, IVisitable {
 
     protected String name = "RandomName";
@@ -31,11 +23,27 @@ public class PlainPlayer implements Player, IVisitable {
     protected Color color =Color.GREEN;
     private int num;
 
+    /**
+     * Creates a player at the given position with the given boundaries using the default name "RandomName" and sets the number of lifes to 3
+     * @param x
+     * @param y
+     * @param width
+     * @param height 
+     */
     public PlainPlayer(int x, int y, int width, int height) {
         me = new Rectangle(x, y, width, height);
         decorators = new ArrayList<>();
     }
     
+    /**
+     * Creates a player with the given name, number of lifes, x and y position and boundaries.
+     * @param name
+     * @param lifes
+     * @param x
+     * @param y
+     * @param width
+     * @param height 
+     */
     public PlainPlayer(String name, int lifes, int x, int y, int width, int height) {
         this.name = name;
         this.lifes = lifes;
@@ -69,10 +77,9 @@ public class PlainPlayer implements Player, IVisitable {
     
     @Override
     public void render(Graphics g) {
-        if(this.getAvaliable()==true) {
+        if(this.getAvaliable()) {
             g.setColor(color);
             g.fillOval(me.x,me.y,me.width,me.height);
-//            g.fillRect(me.x, me.y, me.width, me.height);
         }
     }
 
@@ -104,12 +111,12 @@ public class PlainPlayer implements Player, IVisitable {
 
     @Override
     public void tick() {
-        // Since a plain player can´t go anything there is no mean in implementing this method
+        // Since a plain player can´t do anything there is no mean in implementing this method
     }
 
     @Override
     public void setDirectionStatus(Helper.Direction direction, boolean b) { 
-        // Since a plain player can´t go anything there is no mean in implementing this method
+        // Since a plain player can´t do anything there is no mean in implementing this method
     }
     
     @Override

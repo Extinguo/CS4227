@@ -1,37 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package monster;
 
 import gameobjects.Level;
 import player.Player;
 
-/**
- *
- * @author Magd
- */
 public class SimpleFollowAlgorithm extends FollowState {
-    
+
     private Player player;
     private int n;
 
+    /**
+     * Makes the enemy follow a player using a simple algorithm
+     * @param enemy The enemy
+     * @param level The leveldate
+     * @param player The player to follow
+     */
     public SimpleFollowAlgorithm(Enemy enemy, Level level, Player player) {
         super(enemy, level);
         this.player = player;
         n = 1;
     }
 
+    /**
+     * The enemy follows the player
+     */
     @Override
     public void follow() {
         while (n == 1) {
             int m = level.getController().getPlayers().size();
-            int r=randomGen.nextInt(m);
-            boolean m1=level.getController().getPlayers().get(r).getAvaliable();
-            while(m1==false) {
-                r=randomGen.nextInt(m);
-                m1=level.getController().getPlayers().get(r).getAvaliable();
+            int r = randomGen.nextInt(m);
+            boolean m1 = level.getController().getPlayers().get(r).getAvaliable();
+            while (!m1) {
+                r = randomGen.nextInt(m);
+                m1 = level.getController().getPlayers().get(r).getAvaliable();
             }
             player = level.getController().getPlayers().get(r);
             n++;
@@ -57,7 +57,5 @@ public class SimpleFollowAlgorithm extends FollowState {
             }
         }
     }
-    
-    
-    
+
 }

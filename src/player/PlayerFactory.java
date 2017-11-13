@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package player;
 
 import player.attributes.Speed;
 
-/**
- *
- * @author Magd
- */
+
 public class PlayerFactory {
     
-    public PlayerFactory() {}
+    private PlayerFactory() {
+        // Just hiding the constructor
+    }
     
     public static Player createPlainPlayer(int x, int y, int width, int height) {
         return new PlainPlayer(x, y, width, height);

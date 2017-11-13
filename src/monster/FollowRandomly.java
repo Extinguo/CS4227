@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package monster;
 
 import gameobjects.Level;
 
 import java.awt.Rectangle;
 
-/**
- *
- * @author Magd
- */
+
 public class FollowRandomly extends FollowState {
 
     public FollowRandomly(Enemy enemy, Level level) {
@@ -20,6 +12,13 @@ public class FollowRandomly extends FollowState {
         dir = randomGen.nextInt(4);
     }
 
+    /**
+     * Checks if the enemy can move to the next position
+     * @param nextX The next x-position
+     * @param nextY The next y-position
+     * @return True/false
+     */
+    @Override
     protected boolean canMove(int nextX, int nextY) {
         Rectangle bounds = new Rectangle(nextX, nextY, enemy.getBounds().width, enemy.getBounds().height);
         for (int xx = 0; xx < level.getWalls().length; xx++) {
@@ -34,6 +33,9 @@ public class FollowRandomly extends FollowState {
         return true;
     }
 
+    /**
+     * The enemy follows the player
+     */
     @Override
     public void follow() {
         if (dir == right) {

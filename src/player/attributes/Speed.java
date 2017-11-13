@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package player.attributes;
 
 import collisiondetection.BeanCollisionDetection;
@@ -15,10 +10,7 @@ import player.Player;
 import java.io.IOException;
 import player.PlayerDecorator;
 
-/**
- *
- * @author Magd
- */
+
 public class Speed extends PlayerDecorator { 
     
     private boolean right = false;

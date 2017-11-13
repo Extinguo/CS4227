@@ -1,8 +1,6 @@
 package interceptor;
 
-/**
- * Created by viola on 2017/10/20.
- */
+
 public class PlayerInfoContext implements I_Context {
     private String playerName;
     private String descriptionForLog;
