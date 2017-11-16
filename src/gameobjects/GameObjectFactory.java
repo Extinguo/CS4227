@@ -5,7 +5,7 @@ import java.awt.Color;
 
 public class GameObjectFactory {
     
-    private GameObjectFactory() {
+    public GameObjectFactory() {
         // Hiding the constructor
     }
     

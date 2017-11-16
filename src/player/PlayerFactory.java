@@ -5,7 +5,7 @@ import player.attributes.Speed;
 
 public class PlayerFactory {
     
-    private PlayerFactory() {
+    public PlayerFactory() {
         // Just hiding the constructor
     }
     

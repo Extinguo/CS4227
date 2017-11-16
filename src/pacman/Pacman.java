@@ -23,7 +23,14 @@ public class Pacman {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-                   
+        Progress progress=new Progress();
+        try{
+            Thread.sleep(3000);
+        }
+        catch (InterruptedException e)
+        {
+
+        }
         View view = new View();
         Model model = new Model();
         Dispatcher dispatcher = Dispatcher.getInstance();

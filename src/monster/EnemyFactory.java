@@ -3,7 +3,7 @@ package monster;
 
 public class EnemyFactory{
     
-    private EnemyFactory() {
+    public EnemyFactory() {
         // Hiding the constructor
     }
     

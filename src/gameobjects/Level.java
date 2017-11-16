@@ -92,6 +92,7 @@ public class Level implements Serializable {
                             ((Speed)(playerWithSpeed)).setWallCollision(new WallCollisionDetection(this, new BasicCollisionAlgorithm()));
                             ((Speed)(playerWithSpeed)).setBeanCollision(new BeanCollisionDetection(this, new BasicCollisionAlgorithm()));
                             ((Speed)(playerWithSpeed)).setPlayerEnemyCollisionDetection(new PlayerEnemyCollisionDetection(this, new BasicCollisionAlgorithm()));
+                            playerWithSpeed.setColor(ColorSetter.PickAcolor(count));
                             playerWithSpeed.setNum(count++);
                             controller.addPlayer(playerWithSpeed);
                             break;
