@@ -23,14 +23,29 @@ public class Dispatcher{
         return firstInstance;
     }
 
+    /**
+     *
+     * register an interceptor into the dispatcher
+     * @param interceptor a interceptor which will be added into the dispatcher
+     */
     public void register(Interceptor interceptor){
         interceptorList.add(interceptor);
     }
 
+    /**
+     *
+     * unregister an interceptor into the dispatcher
+     * @param interceptor a interceptor which will be removed into the dispatcher
+     */
     public void remove(Interceptor interceptor){
         interceptorList.remove(interceptor);
     }
 
+    /**
+     *
+     * Dispatcher registered concrete interceptor callbacks when EatBeansLogging events occur
+     * @param context a concrete context object provide method to access the framework's internal state
+     */
     public void dispatchClientRequestInterceptorEatBeansLogging(PlayerInfoContext context) throws IOException {
         ArrayList<Interceptor> interceptors;
         synchronized (this)

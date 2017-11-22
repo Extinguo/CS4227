@@ -43,7 +43,6 @@ public class BeanCollisionDetection extends CollisionDetection {
      * @throws IOException Might throw an IOException if logging fails
      */
     private void logPlayerEatBeans(String playerName, int beans) throws IOException {
-
          Dispatcher.getInstance().dispatchClientRequestInterceptorEatBeansLogging(new PlayerInfoContext(playerName, beans));
 
     }

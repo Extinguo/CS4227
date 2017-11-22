@@ -5,5 +5,10 @@ import java.io.IOException;
 
 @FunctionalInterface
 public interface Interceptor {
-    public void onEatBeans(PlayerInfoContext context) throws IOException;
+    /**
+     *
+     * Implements a specific Out-of-band service: Record the action of the player eating beans
+     * @param context a concrete context object provide method to access the framework's internal state
+     */
+    void onEatBeans(PlayerInfoContext context) throws IOException;
 }
