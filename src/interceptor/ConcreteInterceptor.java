@@ -12,7 +12,7 @@ public class ConcreteInterceptor implements Interceptor{
      * @param context a concrete context object provide method to access the framework's internal state
      */
     @Override
-    public void onEatBeans(PlayerInfoContext context) throws IOException {
+    public void onEatBeans(I_Context context) throws IOException {
 
         logger.logEatBeans(context);
 

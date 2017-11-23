@@ -46,7 +46,7 @@ public class Dispatcher{
      * Dispatcher registered concrete interceptor callbacks when EatBeansLogging events occur
      * @param context a concrete context object provide method to access the framework's internal state
      */
-    public void dispatchClientRequestInterceptorEatBeansLogging(PlayerInfoContext context) throws IOException {
+    public void dispatchClientRequestInterceptorEatBeansLogging(I_Context context) throws IOException {
         ArrayList<Interceptor> interceptors;
         synchronized (this)
         {

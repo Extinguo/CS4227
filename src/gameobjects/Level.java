@@ -97,7 +97,7 @@ public class Level implements Serializable {
                             controller.addPlayer(playerWithSpeed);
                             break;
                         case ENEMYCOLORINPNG:
-                            Enemy enemy=new Enemy(xx*BLOCKSIZE, yy*BLOCKSIZE);
+                            Enemy enemy= EnemyFactory.createEnemy(xx*BLOCKSIZE, yy*BLOCKSIZE);
                             EnemyIntelligentMovement enemyIntelligentMovement=new EnemyIntelligentMovement(this,enemy);
                             enemy.setEnemyIntelligentMovement(enemyIntelligentMovement);
                             enemys.add(enemy);

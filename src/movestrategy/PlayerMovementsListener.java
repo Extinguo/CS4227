@@ -30,6 +30,10 @@ public class PlayerMovementsListener implements KeyListener {
         */
     }
 
+
+    /**
+     * when the button pushed the operation execute
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         if(moveCommands[0] == null) {
@@ -109,6 +113,9 @@ public class PlayerMovementsListener implements KeyListener {
         }
     }
 
+    /**
+     * when the button Released the operation undo
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         if(moveCommands[0] == null) {

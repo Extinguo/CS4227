@@ -15,6 +15,9 @@ public class Invoker {
         rightcommands=new Command[4];
     }
 
+    /**
+     * registers command
+     */
     public void setCommand(int slot, Command upCommand, Command downCommand,Command leftCommand,Command rightCommand)
     {
         upcommands[slot]=upCommand;
@@ -22,6 +25,7 @@ public class Invoker {
         leftcommands[slot]=leftCommand;
         rightcommands[slot]=rightCommand;
     }
+
 
     public void upPressed(int slot)
     {

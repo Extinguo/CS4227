@@ -3,6 +3,7 @@ package collisiondetection;
 import gameobjects.Helper;
 import gameobjects.Level;
 import interceptor.Dispatcher;
+import interceptor.I_Context;
 import interceptor.PlayerInfoContext;
 
 import java.io.IOException;
@@ -43,7 +44,8 @@ public class BeanCollisionDetection extends CollisionDetection {
      * @throws IOException Might throw an IOException if logging fails
      */
     private void logPlayerEatBeans(String playerName, int beans) throws IOException {
-         Dispatcher.getInstance().dispatchClientRequestInterceptorEatBeansLogging(new PlayerInfoContext(playerName, beans));
+        I_Context context = new PlayerInfoContext(playerName, beans);
+         Dispatcher.getInstance().dispatchClientRequestInterceptorEatBeansLogging(context);
 
     }
 
